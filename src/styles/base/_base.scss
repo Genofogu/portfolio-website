@@ -1,0 +1,42 @@
+/* --- 2. GLOBAL RESET & STYLES (THEME-AWARE) --- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Space Grotesk', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
+  // --- THIS IS THE KEY FIX ---
+  // The body now uses the theme variables directly.
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  
+  // Add a smooth transition for the color change
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.custom-cursor-active {
+  cursor: none;
+}
+a, button {
+  cursor: none;
+}
+
+main {
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+}
+
+section {
+  padding: 100px 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+  border-bottom: 1px solid var(--color-border);
+}

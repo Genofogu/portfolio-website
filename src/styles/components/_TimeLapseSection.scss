@@ -1,0 +1,117 @@
+/* --- Time-Lapse Section Styles (Definitive Edition) --- */
+.timelapse-section {
+  position: relative;
+  // A very tall section gives us room to scroll. The "active zone" is in the middle.
+  height: 150vh; 
+  overflow: hidden;
+  background-color: #0c0a18; // Default to night
+}
+
+.timelapse-sky {
+  position: sticky; // The sky remains in view for the duration of the section scroll
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  transition: background 0.5s linear;
+  overflow: hidden;
+}
+
+// --- Starfield (unchanged) ---
+@function makestars($n) {
+  $value: '#{random(2000)}px #{random(2000)}px #FFF';
+  @for $i from 2 through $n { $value: '#{$value} , #{random(2000)}px #{random(2000)}px #FFF'; }
+  @return unquote($value);
+}
+.stars {
+  width: 1px; height: 1px; background: transparent;
+  box-shadow: makestars(700); border-radius: 50%;
+  position: absolute; top: 0; left: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+// --- Weather Foundation: Drifting Clouds ---
+@keyframes drift {
+  from { transform: translateX(-25%); }
+  to { transform: translateX(25%); }
+}
+.clouds {
+  position: absolute;
+  top: 0; left: -25%; // Start off-screen
+  width: 150%; height: 100%;
+  // You would use a repeating transparent cloud PNG here for best effect
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 10%, transparent 50%) 20% 10% / 300px 300px,
+              radial-gradient(circle, rgba(255,255,255,0.15) 10%, transparent 60%) 80% 30% / 400px 400px;
+  background-repeat: no-repeat;
+  animation: drift 120s linear infinite alternate;
+  opacity: 0.5;
+}
+
+
+// --- Sun & Moon ---
+.sun, .moon {
+  position: absolute;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  // Make transitions feel natural, but position updates are instant
+  transition: opacity 0.5s ease-in-out; 
+}
+
+.sun {
+  width: clamp(60px, 10vw, 100px);
+  height: clamp(60px, 10vw, 100px);
+  background: #ffdd00;
+  box-shadow: 0 0 50px #ffdd00, 0 0 100px #ffb703;
+  filter: blur(2px);
+}
+
+.moon {
+  width: clamp(50px, 8vw, 80px);
+  height: clamp(50px, 8vw, 80px);
+  background: #f4f4f4;
+  box-shadow: 0 0 30px #f4f4f4, inset -20px 0px 20px -10px rgba(0,0,0,0.3);
+}
+
+// --- Real-time Clock ---
+.clock {
+  position: absolute;
+  color: var(--color-text-primary);
+  top: 10vh; // Position it higher up
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: clamp(1.5rem, 4vw, 3rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  background: rgba(0,0,0,0.3);
+  padding: 0.5rem 1.5rem;
+  border-radius: 10px;
+  backdrop-filter: blur(5px);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 20;
+}
+
+// --- Ocean (unchanged) ---
+.ocean {
+  position: absolute; bottom: 0; left: 0;
+  width: 100%; height: 25%; z-index: 5;
+}
+
+.wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 200%; // Twice the width to allow for seamless scrolling
+  height: 100px;
+  background-image: url('data:image/svg+xml,...'); // Placeholder for a wave SVG
+  background-repeat: repeat-x;
+  // --- DYNAMIC SPEED ---
+  // We'll control this with JS, but this is a fallback.
+  animation: wave-move 20s linear infinite; 
+}
+
+// A slightly different wave on top for a layered effect
+.wave:nth-of-type(2) {
+  bottom: 10px;
+  animation-duration: 25s;
+  opacity: 0.7;
+}

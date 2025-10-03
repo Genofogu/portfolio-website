@@ -1,0 +1,144 @@
+/* --- Portfolio Section Styles --- */
+/* --- Portfolio Section Styles (with Animation) --- */
+
+.portfolio {
+  position: relative; // Needed for positioning the SVG
+
+  &__header {
+    text-align: center;
+    margin-bottom: 4rem;
+    position: relative;
+  }
+
+  &__title {
+    font-size: clamp(2rem, 5vw, 2.5rem);
+    padding-bottom: 1rem;
+    display: inline-block; // Allows for centering and positioning
+  }
+
+  // --- NEW SVG Connector Styles ---
+  &__connector {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 100px; // Control the visible height
+    width: 100px;
+
+    path {
+      // Set the dash to be the length of the path. This hides it initially.
+      stroke-dasharray: 400;
+      stroke-dashoffset: 400;
+      transition: stroke-dashoffset 1.5s ease-out;
+      transition-delay: 0.3s; // Start drawing after the title fades in
+    }
+  }
+
+  // When the section becomes visible, animate the line
+  &.is-visible .portfolio__connector path {
+    stroke-dashoffset: 0;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+  }
+}
+
+.portfolio {
+  &__title {
+    font-size: clamp(2rem, 5vw, 2.5rem);
+    text-align: center;
+    margin-bottom: 4rem;
+    position: relative;
+    padding-bottom: 1rem;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background-color: var(--accent-primary);
+    }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+  }
+}
+
+.portfolio-card {
+  // --- Animation Initial State ---
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+
+  .portfolio.is-visible & {
+    // --- Animation Final State ---
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+
+  &:hover {
+    transform: translateY(-8px);
+    background-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 30px rgba(0, 242, 234, 0.2);
+  }
+
+  &__title {
+    font-size: 1.3rem;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+  }
+
+  &__description {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    flex-grow: 1; // Pushes the tags/link to the bottom
+    margin-bottom: 1.5rem;
+  }
+
+  &__tags {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+
+    span {
+      background-color: rgba(0, 242, 234, 0.1);
+      color: var(--accent-primary);
+      padding: 0.25rem 0.75rem;
+      border-radius: 15px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+  }
+  
+  &__link {
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: var(--accent-primary);
+    }
+  }
+}
+
+

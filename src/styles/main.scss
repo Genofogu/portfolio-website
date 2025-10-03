@@ -1,0 +1,17 @@
+// 1. Abstracts & Variables
+@import 'base/variables';
+
+// 2. Base Styles
+@import 'base/base';
+
+// 3. Component Styles
+@import 'components/Header';
+@import 'components/Hero';
+@import 'components/About';
+@import 'components/Portfolio';
+@import 'components/Contact';
+@import 'components/Footer';
+@import 'components/CustomCursor';
+@import 'components/Interactive3DSection';
+@import 'components/TimeLapseSection';
+@import 'components/ThemeToggle'; // Add this line

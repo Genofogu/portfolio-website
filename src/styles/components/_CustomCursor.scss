@@ -1,0 +1,56 @@
+/* --- STYLES FOR THE INSTANT CUSTOM CURSOR --- */
+
+.custom-cursor {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  pointer-events: none; 
+  z-index: 9999;
+  
+  // --- THE KEY CHANGE ---
+  // We use transform ONLY for centering and animations.
+  // Position is now handled by 'top' and 'left' from the JS.
+  transform: translate(-50%, -50%); 
+
+  // --- Visibility Logic ---
+  opacity: 0;
+  transition: opacity 0.3s ease; // Only transition opacity now
+
+  &.is-visible {
+    opacity: 1;
+  }
+
+  // The rocket image itself
+  img {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.3s ease; // The image inside can still animate
+  }
+  
+  // --- STATE 2: Idle (Sleeping) ---
+  &.is-idle {
+    img {
+      transform: rotate(-15deg);
+    }
+  }
+
+  // --- STATE 3: Hovering a Link ---
+  // We apply the scale to the outer div, which will combine with the centering transform
+  &.is-link-hover {
+    transform: translate(-50%, -50%) scale(1.5);
+    
+    img {
+      transform: scale(0.66);
+    }
+  }
+
+  // --- STATE 4: Clicking ---
+  &.is-clicking {
+    transform: translate(-50%, -50%) scale(0.8);
+    transition: transform 0.1s ease-out; // Allow the click to feel fast
+
+    &.is-link-hover {
+      transform: translate(-50%, -50%) scale(1.2);
+    }
+  }
+}
