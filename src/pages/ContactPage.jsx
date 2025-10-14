@@ -6,5 +6,4 @@ function AboutPage() {
     <About />
   );
 }
-
 export default AboutPage;
