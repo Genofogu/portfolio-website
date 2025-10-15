@@ -24,7 +24,6 @@ export const ThemeProvider = ({ children }) => {
     document.body.dataset.theme = theme;
     localStorage.setItem('theme', theme);
   }, [theme]);
-
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
       {children}
