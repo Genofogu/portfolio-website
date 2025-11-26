@@ -1,18 +1,127 @@
-/* --- Refined Footer Styles --- */
-.site-footer {
-  // We already had a 'footer' selector, so let's use a class
-  background-color: var(--background-dark);
-  color: var(--text-secondary);
-  border-top: 1px solid var(--border-color);
+/* --- Animated Bubble Footer Styles --- */
+.footer {
+  z-index: 1;
+  // Use a semi-transparent version of our accent color for the background
+  --footer-background: #{color-mix(in srgb, var(--color-accent-primary) 85%, var(--color-background))};
   
-  &__wrapper {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem 1.25rem;
-    text-align: center;
+  display: grid;
+  position: relative;
+  grid-area: footer;
+  min-height: 12rem;
+  overflow: hidden; // Important to contain the bubbles
+}
+
+.bubbles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1rem;
+  background: var(--footer-background);
+  filter: url("#blob"); // This applies our SVG filter
+
+  .bubble {
+    position: absolute;
+    left: var(--position, 50%);
+    background: var(--footer-background);
+    border-radius: 100%;
+    
+    // The two animations that make the effect work
+    animation: bubble-size var(--time, 4s) ease-in infinite var(--delay, 0s),
+               bubble-move var(--time, 4s) ease-in infinite var(--delay, 0s);
+               
+    transform: translate(-50%, 100%);
+  }
+}
+
+.content {
+  z-index: 2; // Ensure content is above the bubbles
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-gap: 2rem;
+  padding: 2rem 4rem;
+  background: var(--footer-background);
+  
+  // Link and text styles
+  a, p {
+    color: var(--color-text-primary);
+    text-decoration: none;
+    opacity: 0.8;
   }
 
-  &__copyright {
-    font-size: 0.9rem;
+  a:hover {
+    opacity: 1;
+    text-decoration: underline;
+  }
+  
+  b {
+    color: var(--color-text-primary);
+    opacity: 1;
+  }
+
+  p {
+    margin: 0;
+    font-size: 0.85rem;
+  }
+}
+
+.footer-links {
+  display: flex;
+  gap: 3rem;
+  flex-wrap: wrap;
+
+  > div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+.footer-credits {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  text-align: right;
+}
+
+
+// --- Keyframe Animations for the Bubbles ---
+@keyframes bubble-size {
+  0%, 75% {
+    width: var(--size, 4rem);
+    height: var(--size, 4rem);
+  }
+  100% {
+    width: 0rem;
+    height: 0rem;
+  }
+}
+
+@keyframes bubble-move {
+  0% {
+    bottom: -4rem;
+  }
+  100% {
+    bottom: var(--distance, 10rem);
+  }
+}
+
+// --- Responsive Adjustments ---
+@media (max-width: 768px) {
+  .content {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+    gap: 2.5rem;
+    padding: 2rem 1.5rem;
+  }
+  .footer-links {
+    justify-content: center;
+    gap: 2rem;
+  }
+  .footer-credits {
+    align-items: center;
+    text-align: center;
   }
 }

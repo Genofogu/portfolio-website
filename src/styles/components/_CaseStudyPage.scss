@@ -1,0 +1,103 @@
+.case-study-page {
+  padding-bottom: 4rem;
+}
+
+.case-study-hero {
+  height: 60vh;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+
+  &__overlay {
+    background: linear-gradient(0deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 100%);
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 4rem 2rem;
+  }
+
+  h1 {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    margin-bottom: 0.5rem;
+  }
+  p {
+    font-size: 1.2rem;
+    color: var(--color-text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+}
+
+.case-study-content-layout {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 4rem;
+  max-width: 1200px;
+  margin: 4rem auto;
+  padding: 0 2rem;
+}
+
+.case-study-main {
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid var(--color-accent-primary);
+    padding-left: 1rem;
+  }
+  p {
+    line-height: 1.8;
+    color: var(--color-text-secondary);
+    margin-bottom: 1.5rem;
+  }
+}
+
+.case-study-sidebar {
+  .sidebar-widget {
+    background-color: var(--color-card-background);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+
+    h3 { margin-top: 0; margin-bottom: 1rem; }
+    p { font-size: 0.9rem; line-height: 1.6; color: var(--color-text-secondary); }
+    .tags {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+      span {
+        background-color: color-mix(in srgb, var(--color-accent-primary) 15%, transparent);
+        color: var(--color-accent-primary);
+        padding: 0.25rem 0.75rem;
+        border-radius: 15px;
+        font-size: 0.8rem;
+      }
+    }
+  }
+}
+
+.case-study-footer {
+  text-align: center;
+  margin-top: 4rem;
+  .back-to-portfolio-link {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    &:hover { color: var(--color-accent-primary); }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 900px) {
+  .case-study-content-layout {
+    grid-template-columns: 1fr; // Stack columns on smaller screens
+  }
+  .case-study-sidebar {
+    grid-row: 1; // Move sidebar to the top on mobile
+  }
+}

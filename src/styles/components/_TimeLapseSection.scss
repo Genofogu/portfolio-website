@@ -1,4 +1,6 @@
 /* --- Time-Lapse Section Styles (Definitive Edition) --- */
+@use 'sass:math';
+@use 'sass:string';
 .timelapse-section {
   position: relative;
   // A very tall section gives us room to scroll. The "active zone" is in the middle.
@@ -18,15 +20,11 @@
 
 // --- Starfield (unchanged) ---
 @function makestars($n) {
-  $value: '#{random(2000)}px #{random(2000)}px #FFF';
-  @for $i from 2 through $n { $value: '#{$value} , #{random(2000)}px #{random(2000)}px #FFF'; }
-  @return unquote($value);
-}
-.stars {
-  width: 1px; height: 1px; background: transparent;
-  box-shadow: makestars(700); border-radius: 50%;
-  position: absolute; top: 0; left: 0;
-  transition: opacity 1s ease-in-out;
+  $value: '#{math.random(2000)}px #{math.random(2000)}px #FFF';
+  @for $i from 2 through $n {
+    $value: '#{$value} , #{math.random(2000)}px #{math.random(2000)}px #FFF';
+  }
+  @return string.unquote($value);
 }
 
 // --- Weather Foundation: Drifting Clouds ---

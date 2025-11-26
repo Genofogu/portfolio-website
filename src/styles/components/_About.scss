@@ -1,12 +1,9 @@
-/* --- About Section Styles --- */
 .about {
-  // --- Initial state for animation ---
-  // Elements start invisible and slightly moved down
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 
-  // --- Final state when 'is-visible' class is added ---
+  
   &.is-visible {
     opacity: 1;
     transform: translateY(0);
@@ -19,7 +16,6 @@
     position: relative;
     padding-bottom: 1rem;
 
-    // A subtle underline accent
     &::after {
       content: '';
       position: absolute;
@@ -34,7 +30,7 @@
 
   &__content {
     display: grid;
-    grid-template-columns: 2fr 1fr; // 2/3 for text, 1/3 for skills
+    grid-template-columns: 2fr 1fr; 
     gap: 3rem;
   }
 
@@ -61,10 +57,9 @@
   }
 }
 
-/* --- Responsiveness for the About Section --- */
 @media (max-width: 768px) {
   .about__content {
-    grid-template-columns: 1fr; // Stack columns on mobile
+    grid-template-columns: 1fr; 
     gap: 2.5rem;
   }
 }

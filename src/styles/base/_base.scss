@@ -1,4 +1,4 @@
-/* --- 2. GLOBAL RESET & STYLES (THEME-AWARE) --- */
+@use 'variables'; 
 * {
   box-sizing: border-box;
   margin: 0;
@@ -10,23 +10,32 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   
-  // --- THIS IS THE KEY FIX ---
-  // The body now uses the theme variables directly.
+  // --- THEME DEFINITION ---
+  // 1. Apply the default (dark) theme variables.
+  @include variables.themify('dark');
+  
+  // 2. Create the override rule for light mode.
+  &[data-theme='light'] {
+    @include variables.themify('light');
+  }
+  
+  // --- THEME APPLICATION ---
+  // 3. Apply the theme colors to the body.
   background-color: var(--color-background);
   color: var(--color-text-primary);
   
-  // Add a smooth transition for the color change
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-body.custom-cursor-active {
-  cursor: none;
-}
-a, button {
+// --- The rest of your base styles ---
+body.custom-cursor-active,
+body.custom-cursor-active a,
+body.custom-cursor-active button {
   cursor: none;
 }
 
 main {
+  // You can now REMOVE your temporary background fix from here.
   overflow-x: hidden;
 }
 

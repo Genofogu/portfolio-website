@@ -1,0 +1,104 @@
+/* --- Code Playground Section Styles (Theme-Aware) --- */
+
+.playground-section {
+  padding: 100px 20px;
+}
+
+.playground-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  border: 1px solid var(--color-border); // Use theme variable
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: var(--color-card-background); // Use theme variable
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, border-color 0.3s ease; // Add transition
+}
+
+.playground-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  // Use a semi-transparent mix for the header background
+  background-color: color-mix(in srgb, var(--color-background) 50%, var(--color-text-primary) 5%);
+  border-bottom: 1px solid var(--color-border); // Use theme variable
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.playground-tabs {
+  display: flex;
+  gap: 0.5rem;
+
+  .tab {
+    background: none;
+    border: none;
+    color: var(--color-text-secondary);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    cursor: none; // Use our custom cursor
+
+    &.active {
+      background-color: var(--color-background);
+      color: var(--color-text-primary);
+    }
+
+    &:hover:not(.active) {
+      background-color: var(--color-border);
+    }
+  }
+}
+
+.playground-controls .run-button {
+  background-color: var(--color-accent-primary); // Use theme variable
+  color: var(--color-background); // Use theme variable for text
+  border: none;
+  padding: 0.6rem 1.5rem;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: background-color 0.2s ease, opacity 0.2s ease;
+  cursor: none; // Use our custom cursor
+
+  &:hover {
+    filter: brightness(1.1);
+  }
+
+  &:disabled {
+    background-color: var(--color-text-secondary);
+    color: var(--color-background);
+    opacity: 0.6;
+  }
+}
+
+// Target the CodeMirror editor container
+.cm-editor {
+  font-size: 1rem;
+  
+  // This ensures that even in light mode, the dark editor has a subtle border
+  // that matches the theme.
+  outline: 1px solid var(--color-border);
+}
+
+.playground-output {
+  min-height: 100px;
+  background-color: #011627; // Keep the console dark for readability
+  padding: 1rem;
+  color: #d6deeb;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  border-top: 1px solid var(--color-border); // Use theme variable
+
+  pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+
+  .output-line--log { color: #d6deeb; }
+  .output-line--error { color: #ff5572; font-weight: bold; }
+  .output-line--system { color: #82aebb; font-style: italic; }
+}

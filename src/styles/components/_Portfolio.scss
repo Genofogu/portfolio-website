@@ -1,8 +1,6 @@
-/* --- Portfolio Section Styles --- */
-/* --- Portfolio Section Styles (with Animation) --- */
-
+@use '../base/variables' as *;
 .portfolio {
-  position: relative; // Needed for positioning the SVG
+  position: relative; 
 
   &__header {
     text-align: center;
@@ -13,10 +11,9 @@
   &__title {
     font-size: clamp(2rem, 5vw, 2.5rem);
     padding-bottom: 1rem;
-    display: inline-block; // Allows for centering and positioning
+    display: inline-block; 
   }
 
-  // --- NEW SVG Connector Styles ---
   &__connector {
     position: absolute;
     top: 100%;
@@ -26,15 +23,14 @@
     width: 100px;
 
     path {
-      // Set the dash to be the length of the path. This hides it initially.
       stroke-dasharray: 400;
       stroke-dashoffset: 400;
       transition: stroke-dashoffset 1.5s ease-out;
-      transition-delay: 0.3s; // Start drawing after the title fades in
+      transition-delay: 0.3s; 
     }
   }
 
-  // When the section becomes visible, animate the line
+  
   &.is-visible .portfolio__connector path {
     stroke-dashoffset: 0;
   }
