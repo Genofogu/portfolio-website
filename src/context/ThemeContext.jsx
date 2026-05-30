@@ -1,33 +1,48 @@
-import React, { createContext, useState, useEffect, useContext } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const ThemeContext = createContext();
 
-export const useTheme = () => useContext(ThemeContext);
+export const themesList = [
+  { id: 'geno-dark', name: 'Geno Dark' },
+  { id: 'soulwake', name: 'SoulWake' },
+  { id: 'inferno', name: 'Inferno' },
+  { id: 'emerald', name: 'Emerald' },
+  { id: 'royal-gold', name: 'Royal Gold' },
+  { id: 'sakura', name: 'Sakura' },
+  { id: 'ocean', name: 'Ocean' },
+  { id: 'pure-light', name: 'Pure Light' }
+];
 
 export const ThemeProvider = ({ children }) => {
-  const getInitialTheme = () => {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      return savedTheme;
-    }
-    const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    return userPrefersDark ? 'dark' : 'light';
-  };
-
-  const [theme, setTheme] = useState(getInitialTheme);
-
-  const toggleTheme = () => {
-    setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
-  };
+  const [theme, setTheme] = useState(() => {
+    const savedTheme = localStorage.getItem('genofogu-theme');
+    return savedTheme || 'geno-dark';
+  });
 
   useEffect(() => {
-    document.body.dataset.theme = theme;
-    localStorage.setItem('theme', theme);
+    localStorage.setItem('genofogu-theme', theme);
+    document.body.setAttribute('data-theme', theme);
   }, [theme]);
 
+  const cycleTheme = () => {
+    setTheme(prev => {
+      const currentIndex = themesList.findIndex(t => t.id === prev);
+      const nextIndex = (currentIndex + 1) % themesList.length;
+      return themesList[nextIndex].id;
+    });
+  };
+
+  const setSpecificTheme = (themeId) => {
+    if (themesList.find(t => t.id === themeId)) {
+      setTheme(themeId);
+    }
+  };
+
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={{ theme, cycleTheme, setSpecificTheme, themesList }}>
       {children}
     </ThemeContext.Provider>
   );
 };
+
+export const useTheme = () => useContext(ThemeContext);

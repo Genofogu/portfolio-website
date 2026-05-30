@@ -1,16 +1,16 @@
-/* --- Time-Lapse Section Styles (Definitive Edition) --- */
 @use 'sass:math';
 @use 'sass:string';
+@use '../base/variables' as *;
+
 .timelapse-section {
   position: relative;
-  // A very tall section gives us room to scroll. The "active zone" is in the middle.
-  height: 150vh; 
+  height: 200vh; // Longer scroll for better exploration
   overflow: hidden;
-  background-color: #0c0a18; // Default to night
+  background-color: #0c0a18;
 }
 
 .timelapse-sky {
-  position: sticky; // The sky remains in view for the duration of the section scroll
+  position: sticky;
   top: 0;
   width: 100%;
   height: 100vh;
@@ -18,7 +18,7 @@
   overflow: hidden;
 }
 
-// --- Starfield (unchanged) ---
+// --- Starfield ---
 @function makestars($n) {
   $value: '#{math.random(2000)}px #{math.random(2000)}px #FFF';
   @for $i from 2 through $n {
@@ -27,89 +27,153 @@
   @return string.unquote($value);
 }
 
-// --- Weather Foundation: Drifting Clouds ---
+.stars {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: transparent;
+  box-shadow: makestars(100);
+  transition: opacity 0.5s ease;
+}
+
+// --- Clouds ---
 @keyframes drift {
-  from { transform: translateX(-25%); }
-  to { transform: translateX(25%); }
+  from { transform: translateX(-10%); }
+  to { transform: translateX(10%); }
 }
 .clouds {
   position: absolute;
-  top: 0; left: -25%; // Start off-screen
-  width: 150%; height: 100%;
-  // You would use a repeating transparent cloud PNG here for best effect
-  background: radial-gradient(circle, rgba(255,255,255,0.1) 10%, transparent 50%) 20% 10% / 300px 300px,
-              radial-gradient(circle, rgba(255,255,255,0.15) 10%, transparent 60%) 80% 30% / 400px 400px;
-  background-repeat: no-repeat;
-  animation: drift 120s linear infinite alternate;
-  opacity: 0.5;
+  top: 0; left: -10%;
+  width: 120%; height: 100%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 10%, transparent 40%) 20% 10% / 400px 300px,
+              radial-gradient(circle, rgba(255,255,255,0.15) 10%, transparent 60%) 80% 30% / 500px 400px;
+  background-repeat: repeat-x;
+  animation: drift 150s linear infinite alternate;
+  transition: opacity 2s ease;
 }
-
 
 // --- Sun & Moon ---
 .sun, .moon {
   position: absolute;
   border-radius: 50%;
   transform: translate(-50%, -50%);
-  // Make transitions feel natural, but position updates are instant
-  transition: opacity 0.5s ease-in-out; 
+  transition: opacity 0.5s ease;
 }
-
 .sun {
-  width: clamp(60px, 10vw, 100px);
-  height: clamp(60px, 10vw, 100px);
+  width: clamp(80px, 12vw, 120px);
+  height: clamp(80px, 12vw, 120px);
   background: #ffdd00;
-  box-shadow: 0 0 50px #ffdd00, 0 0 100px #ffb703;
+  box-shadow: 0 0 80px #ffdd00, 0 0 150px #ffb703;
   filter: blur(2px);
 }
-
 .moon {
-  width: clamp(50px, 8vw, 80px);
-  height: clamp(50px, 8vw, 80px);
+  width: clamp(60px, 10vw, 100px);
+  height: clamp(60px, 10vw, 100px);
   background: #f4f4f4;
-  box-shadow: 0 0 30px #f4f4f4, inset -20px 0px 20px -10px rgba(0,0,0,0.3);
+  box-shadow: 0 0 40px #f4f4f4, inset -15px 0px 25px -10px rgba(0,0,0,0.4);
 }
 
-// --- Real-time Clock ---
-.clock {
+// --- Environment HUD ---
+.environment-data-hud {
   position: absolute;
-  color: var(--color-text-primary);
-  top: 10vh; // Position it higher up
+  top: 15vh;
   left: 50%;
-  transform: translateX(-50%);
-  font-size: clamp(1.5rem, 4vw, 3rem);
-  font-weight: 700;
-  color: var(--text-primary);
-  background: rgba(0,0,0,0.3);
-  padding: 0.5rem 1.5rem;
-  border-radius: 10px;
-  backdrop-filter: blur(5px);
+  transform: translateX(-50%) translateY(-20px);
+  @include glass(0.1);
+  padding: 1.5rem 2.5rem;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
   opacity: 0;
-  transition: opacity 0.5s ease;
-  z-index: 20;
+  pointer-events: none;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &.is-visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .hud-time {
+    font-size: clamp(3rem, 8vw, 5rem);
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -2px;
+    line-height: 1;
+  }
+
+  .hud-details {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .hud-item {
+    color: rgba(255,255,255,0.9);
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    i { color: var(--color-accent-primary); }
+  }
 }
 
-// --- Ocean (unchanged) ---
+// --- Rain & Fireflies ---
+@keyframes rain-fall {
+  0% { background-position: 0 0; }
+  100% { background-position: 20% 100vh; }
+}
+.rain {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 100%);
+  background-size: 10px 100px;
+  animation: rain-fall 1s linear infinite;
+  opacity: 0.5;
+}
+
+@keyframes firefly-float {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0; }
+  50% { transform: translate(100px, -100px) scale(1.5); opacity: 1; }
+}
+.fireflies {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(200,255,100,0.8) 2px, transparent 4px) 15% 70% / 10px 10px,
+              radial-gradient(circle, rgba(200,255,100,0.8) 2px, transparent 4px) 75% 80% / 10px 10px;
+  background-repeat: no-repeat;
+  animation: firefly-float 8s ease-in-out infinite alternate;
+}
+
+// --- Ocean ---
 .ocean {
   position: absolute; bottom: 0; left: 0;
   width: 100%; height: 25%; z-index: 5;
+}
+
+@keyframes wave-move {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 .wave {
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 200%; // Twice the width to allow for seamless scrolling
-  height: 100px;
-  background-image: url('data:image/svg+xml,...'); // Placeholder for a wave SVG
+  width: 200%;
+  height: 80px;
+  background: linear-gradient(to bottom, transparent, rgba(58, 134, 255, 0.4));
+  clip-path: polygon(0 50%, 10% 40%, 20% 50%, 30% 60%, 40% 50%, 50% 40%, 60% 50%, 70% 60%, 80% 50%, 90% 40%, 100% 50%, 100% 100%, 0 100%);
   background-repeat: repeat-x;
-  // --- DYNAMIC SPEED ---
-  // We'll control this with JS, but this is a fallback.
-  animation: wave-move 20s linear infinite; 
+  animation: wave-move 15s linear infinite; 
 }
-
-// A slightly different wave on top for a layered effect
 .wave:nth-of-type(2) {
-  bottom: 10px;
-  animation-duration: 25s;
-  opacity: 0.7;
+  bottom: -10px;
+  animation-duration: 22s;
+  animation-direction: reverse;
+  opacity: 0.6;
 }

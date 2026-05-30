@@ -1,17 +1,22 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
-import './styles/main.scss';
-
-import Sidebar from './components/Sidebar'; // Import Sidebar
-import Header from './components/Header';   // Import Header
+import { Routes, Route } from 'react-router-dom';
+import Sidebar from './components/Sidebar';
+import Header from './components/Header';
+import DashboardPage from './pages/DashboardPage';
+import TasksPage from './pages/TasksPage';
+import StatsPage from './pages/StatsPage';
 
 function Scheduler() {
   return (
     <div className="scheduler-app">
-      <Sidebar /> {/* Add the Sidebar */}
+      <Sidebar />
       <Header />
       <main className="scheduler-main-content">
-        <Outlet />
+        <Routes>
+          <Route path="/" element={<DashboardPage />} />
+          <Route path="tasks" element={<TasksPage />} />
+          <Route path="stats" element={<StatsPage />} />
+        </Routes>
       </main>
     </div>
   );

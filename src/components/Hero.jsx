@@ -3,29 +3,54 @@ import React, { useState, useEffect, useRef } from 'react';
 function Hero() {
   const heroRef = useRef(null);
   
-  // NEW TEXT: Focused on data science and strategy
-  const titlePart1 = "Data Scientist & Strategic ";
-  const titlePart2 = "Innovator"; // A powerful, modern term
+  const titlePart1 = "Building AI Systems, \nDigital Products & ";
   
-  const [animatedWord, setAnimatedWord] = useState(titlePart2);
+  const animatedWords = ["Future Ventures", "RAG Systems", "Cloud Solutions", "SoulWake"];
+  const [wordIndex, setWordIndex] = useState(0);
+  const [animatedWord, setAnimatedWord] = useState(animatedWords[0]);
   const intervalRef = useRef(null);
+  const wordCycleRef = useRef(null);
 
-  // Continuous Scramble Animation (remains the same)
+  // Scramble Animation
   useEffect(() => {
-    const chars = "アイウエオカキクケコサシスセソタチツテト<>-_\\/[]{}—=+*^?#"; // More data/math/cyber feel
-    
+    const chars = "アイウエオカキクケコサシスセソ<>-_\\/[]{}—=+*^?#"; 
+    const currentTarget = animatedWords[wordIndex];
+    let step = 0;
+
     const scrambleAnimation = () => {
-      const newText = titlePart2
+      const newText = currentTarget
         .split('')
-        .map((char, index) => (Math.random() > 0.6) ? titlePart2[index] : chars[Math.floor(Math.random() * chars.length)])
+        .map((char, index) => {
+          if (char === ' ') return ' ';
+          if (index < step) return currentTarget[index];
+          return Math.random() > 0.8 ? currentTarget[index] : chars[Math.floor(Math.random() * chars.length)];
+        })
         .join('');
+      
       setAnimatedWord(newText);
+      step += 0.5; // Speed of reveal
+
+      if (step > currentTarget.length + 5) {
+        clearInterval(intervalRef.current);
+        setAnimatedWord(currentTarget);
+      }
     };
-    intervalRef.current = setInterval(scrambleAnimation, 80);
+
+    clearInterval(intervalRef.current);
+    intervalRef.current = setInterval(scrambleAnimation, 50);
+
     return () => clearInterval(intervalRef.current);
+  }, [wordIndex]);
+
+  // Cycle words every 4 seconds
+  useEffect(() => {
+    wordCycleRef.current = setInterval(() => {
+      setWordIndex((prev) => (prev + 1) % animatedWords.length);
+    }, 4000);
+    return () => clearInterval(wordCycleRef.current);
   }, []);
 
-  // Spotlight Effect (remains the same)
+  // Spotlight Effect
   useEffect(() => {
     const heroElement = heroRef.current;
     if (!heroElement) return;
@@ -42,24 +67,44 @@ function Hero() {
   }, []);
 
   return (
-    <section id="hero" className="hero" ref={heroRef}>
+    <section id="hero" className="hero g-section" ref={heroRef}>
       <div className="hero__content">
         <div className="hero__animation-group">
+          
+          <div className="hero__badges">
+            <span className="badge">Python</span>
+            <span className="badge">TensorFlow</span>
+            <span className="badge">AWS / GCP</span>
+            <span className="badge">LangChain</span>
+            <span className="badge">React + SCSS</span>
+          </div>
+
           <h1 className="hero__title">
-            {titlePart1}
+            <span className="title-static">{titlePart1}</span>
+            <br />
             <span className="hero__title--animated">{animatedWord}</span>
           </h1>
-          {/* NEW SUBTITLE: Focused on value and impact */}
+          
           <p className="hero__subtitle">
-            I translate complex data into actionable insights and strategic advantages, driving business growth through machine learning and predictive analytics.
+            <strong>Geno (Anu Gaur)</strong> — MCA Aspirant • AI/ML Developer • RAG Builder • Cloud Learner • Future Founder.
           </p>
-          {/* NEW CTA TEXT */}
-          <a href="#portfolio" className="hero__cta-button">
-            View Case Studies
-          </a>
+
+          <p className="hero__bio">
+            I engineer scalable AI systems, develop intelligent web applications, and explore the limits of machine learning to bring ambitious product concepts like SoulWake into reality.
+          </p>
+
+          <div className="hero__actions">
+            <a href="#portfolio" className="hero__cta-button primary">
+              View My Work
+            </a>
+            <a href="https://github.com/genofogu" target="_blank" rel="noreferrer" className="hero__cta-button secondary">
+              <i className="fa-brands fa-github"></i> GitHub
+            </a>
+          </div>
         </div>
       </div>
     </section>
   );
 }
+
 export default Hero;

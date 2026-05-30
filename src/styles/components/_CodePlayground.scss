@@ -39,7 +39,7 @@
     font-size: 0.9rem;
     font-weight: 500;
     transition: all 0.2s ease;
-    cursor: none; // Use our custom cursor
+    cursor: pointer;
 
     &.active {
       background-color: var(--color-background);
@@ -60,7 +60,7 @@
   border-radius: 6px;
   font-weight: bold;
   transition: background-color 0.2s ease, opacity 0.2s ease;
-  cursor: none; // Use our custom cursor
+  cursor: pointer;
 
   &:hover {
     filter: brightness(1.1);

@@ -1,19 +1,28 @@
-@use 'base/base';
+// Core Base
 @use 'base/variables';
+@use 'base/base';
 
+// Layout & Global Components
 @use 'components/Header';
-@use 'components/Hero';
-@use 'components/About';
-@use 'components/Portfolio';
-@use 'components/Contact';
-@use 'components/CustomCursor';
-@use 'components/Interactive3DSection';
-@use 'components/TimeLapseSection';
-@use 'components/ThemeToggle';
-@use 'components/CodePlayground';
-@use 'components/CaseStudyPage';
-@use 'components/SocialCards';
 @use 'components/FluidFooter';
+@use 'components/CustomCursor';
+@use 'components/ThemeToggle';
+
+// Layout Pages
+@use 'components/Hero';
+@use 'components/Portfolio';
+@use 'components/SocialCards';
+@use 'components/TimeLapseSection';
+
+// Individual Pages
+@use 'components/AboutPage';
+@use 'components/ContactPage';
+@use 'components/PlaygroundPage';
+@use 'components/GameHub';
+@use 'components/CaseStudyPage';
+
+// Old Components to remove/refactor eventually but kept for safety
+@use 'components/About'; // for old references
+@use 'components/Interactive3DSection';
+@use 'components/CodePlayground';
 @use 'components/AuthForm';
-@use 'components/UnityGame';
-@use 'components/ExternalGame'; 

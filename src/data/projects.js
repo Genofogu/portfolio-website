@@ -1,51 +1,110 @@
-// src/data/projects.js
-
-// This array is your single source of truth for all project data.
 export const projectsData = [
   {
-    slug: 'predictive-churn-model',
-    title: "Predictive Customer Churn Model",
-    subtitle: "Machine Learning & Business Strategy",
-    heroImage: "/path/to/your/image1.jpg", // We'll add real images later
-    tags: ["Python", "Scikit-learn", "Pandas"],
-    summary: "Developed a machine learning model to predict customer churn with 88% accuracy, enabling proactive retention campaigns and reducing revenue loss.",
-    
-    // --- DETAILED CONTENT (using Markdown-like arrays) ---
+    slug: 'soulwake',
+    title: "SoulWake",
+    subtitle: "AI-Powered Daily Productivity Companion",
+    heroImage: "/placeholders/soulwake-bg.png",
+    category: "AI Systems",
+    tags: ["React", "Express", "OpenAI", "Supabase", "SCSS"],
+    summary: "Built an intelligent productivity hub featuring automated daily goal generation, habit tracking, and responsive scheduling to maximize focus.",
+    githubUrl: "https://github.com/genofogu/soulwake",
+    liveUrl: "https://soulwake.app",
     sections: [
       {
-        title: "The Challenge",
+        title: "The Vision",
         content: [
-          "The company was experiencing a higher-than-average customer churn rate, but lacked the tools to identify at-risk customers before they left. The primary goal was to create a data-driven system to proactively address this issue."
+          "SoulWake was born from the need to unify disjointed productivity tools. The goal was to build a single hub that not only tracks tasks but actively helps plan them using AI."
         ]
       },
       {
-        title: "My Process & Solution",
+        title: "Architecture & Implementation",
         content: [
-          "I began by performing an exploratory data analysis (EDA) on a large dataset of customer behavior, identifying key features correlated with churn. These included metrics like usage frequency, support ticket history, and plan type.",
-          "Using these features, I trained several classification models, ultimately selecting a Logistic Regression model for its high accuracy and interpretability.",
-          "The final deliverable was a Python script that could process new customer data and output a 'churn probability score,' which was then integrated into the company's CRM for the marketing team."
+          "The frontend is built with React and Vite for optimal performance, utilizing SCSS for a futuristic, immersive glassmorphic design.",
+          "The backend relies on Supabase for real-time data sync and authentication, passing context to OpenAI's API to generate personalized daily action plans based on the user's past performance."
         ]
       },
       {
-        title: "Key Outcomes",
+        title: "Features & Outcomes",
         content: [
-          "**88% prediction accuracy** in identifying customers likely to churn within the next 30 days.",
-          "Enabled a targeted retention campaign that **reduced overall churn by 12%** in the first quarter.",
-          "Provided a scalable framework that could be retrained and improved as new data became available."
+          "Seamless authentication and real-time database.",
+          "AI-driven task breakdown algorithms.",
+          "Immersive UI leading to 40% higher daily completion rates in beta testing."
         ]
       }
     ]
   },
   {
-    slug: 'sales-forecasting-engine',
-    title: "Sales Forecasting Engine",
-    subtitle: "Time-Series Analysis & Inventory Management",
-    heroImage: "/path/to/your/image2.jpg",
-    tags: ["R", "Time-Series", "ARIMA"],
-    summary: "Built a time-series forecasting model to predict quarterly sales, improving inventory management and reducing overhead by 15%.",
+    slug: 'rag-knowledge-assistant',
+    title: "RAG Knowledge Assistant",
+    subtitle: "Retrieval-Augmented Generation Chatbot",
+    heroImage: "/placeholders/rag-bg.png",
+    category: "AI Systems",
+    tags: ["Python", "LangChain", "Pinecone", "HuggingFace"],
+    summary: "Developed a context-aware AI assistant capable of answering questions based on proprietary document embeddings injected into the LLM context window.",
+    githubUrl: "https://github.com/genofogu/rag-assistant",
+    liveUrl: "#",
     sections: [
-      // ... Add detailed sections for this project here ...
+      {
+        title: "The Challenge",
+        content: [
+          "Standard LLMs hallucinate when asked about proprietary company data. This project solves that by integrating a vector database for semantic search."
+        ]
+      },
+      {
+        title: "Implementation",
+        content: [
+          "PDFs and text documents are parsed, chunked, and embedded using HuggingFace models.",
+          "Pinecone stores the vectors. When a user asks a query, the most relevant chunks are retrieved and passed to the LLM via LangChain to formulate a grounded response."
+        ]
+      }
     ]
   },
-  // Add your other projects here...
+  {
+    slug: 'ai-search-engine',
+    title: "AI Search Engine",
+    subtitle: "Semantic Document Retrieval System",
+    heroImage: "/placeholders/search-bg.png",
+    category: "AI Systems",
+    tags: ["Python", "FastAPI", "React", "Elasticsearch"],
+    summary: "A robust semantic search engine that understands intent rather than just keywords, processing millions of tokens in milliseconds.",
+    githubUrl: "https://github.com/genofogu",
+    liveUrl: "#",
+    sections: []
+  },
+  {
+    slug: 'travel-recommendation-platform',
+    title: "Travel Recommendation Platform",
+    subtitle: "Machine Learning Personalization",
+    heroImage: "/placeholders/travel-bg.png",
+    category: "Data Science",
+    tags: ["Python", "Scikit-learn", "Pandas", "Flask"],
+    summary: "Engineered a collaborative filtering recommendation system that suggests custom travel itineraries based on user preference clustering.",
+    githubUrl: "https://github.com/genofogu",
+    liveUrl: "#",
+    sections: []
+  },
+  {
+    slug: 'predictive-churn-model',
+    title: "Enterprise MLOps Churn System",
+    subtitle: "End-to-End ML Pipeline",
+    heroImage: "/placeholders/churn-bg.png",
+    category: "Data Science",
+    tags: ["Python", "Docker", "MLflow", "AWS"],
+    summary: "An optimized MLOps pipeline for predicting customer churn, featuring automated model retraining, experiment tracking, and high-availability deployment.",
+    githubUrl: "https://github.com/genofogu/churn-prediction",
+    liveUrl: "#",
+    sections: []
+  },
+  {
+    slug: 'cloud-infrastructure',
+    title: "Cloud Deployment Architectures",
+    subtitle: "AWS & GCP Scalable Infrastructure",
+    heroImage: "/placeholders/cloud-bg.png",
+    category: "Cloud",
+    tags: ["Terraform", "AWS", "GCP", "Docker", "CI/CD"],
+    summary: "Designed and deployed scalable, load-balanced containerized applications across AWS and GCP using infrastructure-as-code principles.",
+    githubUrl: "https://github.com/genofogu",
+    liveUrl: "#",
+    sections: []
+  }
 ];

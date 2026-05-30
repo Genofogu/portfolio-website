@@ -3,11 +3,11 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { projectsData } from '../data/projects'; // Import our new database
 
 function CaseStudyPage() {
-  const { slug } = useParams();
+  const { id } = useParams();
   const navigate = useNavigate(); // Hook for programmatic navigation
   
   // Find the project data that matches the slug from the URL
-  const project = projectsData.find(p => p.slug === slug);
+  const project = projectsData.find(p => p.slug === id);
 
   // If no project is found for the given slug, redirect to a 404 page or homepage
   useEffect(() => {

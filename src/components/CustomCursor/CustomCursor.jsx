@@ -1,20 +1,26 @@
 import React, { useState, useEffect } from 'react';
-// Sticking with the URL import as it's the most stable for now.
 import RocketCursorURL from './assets/RocketCursor.svg';
 
 function CustomCursor() {
-  // --- The Core Change: Simple state for position ---
-  // We start it off-screen so it's not visible at position 0,0 on load.
   const [position, setPosition] = useState({ x: -100, y: -100 });
-  
-  // State for visibility and interactions remains the same
   const [isVisible, setIsVisible] = useState(false);
   const [isHoveringLink, setIsHoveringLink] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
-  const [isIdle, setIsIdle] = useState(true); // Start as idle
+  const [isIdle, setIsIdle] = useState(true);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
 
-  // useEffect now only handles setting up and cleaning up event listeners
   useEffect(() => {
+    const checkTouch = () => {
+      return 'ontouchstart' in window || navigator.maxTouchPoints > 0 || window.innerWidth < 768;
+    };
+
+    if (checkTouch()) {
+      setIsTouchDevice(true);
+      document.body.classList.remove('custom-cursor-active');
+      return;
+    }
+
+    setIsTouchDevice(false);
     let idleTimer = null;
 
     const handleMouseEnter = () => {
@@ -27,21 +33,25 @@ function CustomCursor() {
     };
 
     const handleMouseMove = (e) => {
-      // --- DIRECTLY SET POSITION - NO DELAY, NO SMOOTHING ---
       setPosition({ x: e.clientX, y: e.clientY });
-
-      // Handle idle state
       setIsIdle(false);
       clearTimeout(idleTimer);
-      idleTimer = setTimeout(() => setIsIdle(true), 1000); // Shorter idle time
+      idleTimer = setTimeout(() => setIsIdle(true), 1000);
     };
 
-    const handleMouseOver = (e) => e.target.closest('a, button') && setIsHoveringLink(true);
-    const handleMouseOut = (e) => e.target.closest('a, button') && setIsHoveringLink(false);
+    const handleMouseOver = (e) => {
+      if (e.target.closest('a, button, select, input[type="submit"], input[type="button"], [role="button"]')) {
+        setIsHoveringLink(true);
+      }
+    };
+    const handleMouseOut = (e) => {
+      if (e.target.closest('a, button, select, input[type="submit"], input[type="button"], [role="button"]')) {
+        setIsHoveringLink(false);
+      }
+    };
     const handleMouseDown = () => setIsClicking(true);
     const handleMouseUp = () => setIsClicking(false);
 
-    // Add all event listeners
     document.documentElement.addEventListener('mouseenter', handleMouseEnter);
     document.documentElement.addEventListener('mouseleave', handleMouseLeave);
     window.addEventListener('mousemove', handleMouseMove);
@@ -50,7 +60,11 @@ function CustomCursor() {
     window.addEventListener('mousedown', handleMouseDown);
     window.addEventListener('mouseup', handleMouseUp);
 
-    return () => { // Cleanup
+    // Initial check in case cursor is already inside window
+    document.body.classList.add('custom-cursor-active');
+    setIsVisible(true);
+
+    return () => {
       document.documentElement.removeEventListener('mouseenter', handleMouseEnter);
       document.documentElement.removeEventListener('mouseleave', handleMouseLeave);
       window.removeEventListener('mousemove', handleMouseMove);
@@ -58,9 +72,14 @@ function CustomCursor() {
       document.removeEventListener('mouseout', handleMouseOut);
       window.removeEventListener('mousedown', handleMouseDown);
       window.removeEventListener('mouseup', handleMouseUp);
+      document.body.classList.remove('custom-cursor-active');
       clearTimeout(idleTimer);
     };
   }, []);
+
+  if (isTouchDevice) {
+    return null;
+  }
 
   const isMoving = !isIdle;
   const cursorClasses = `custom-cursor ${isVisible ? 'is-visible' : ''} ${isMoving ? 'is-moving' : ''} ${isIdle ? 'is-idle' : ''} ${isHoveringLink ? 'is-link-hover' : ''} ${isClicking ? 'is-clicking' : ''}`;
@@ -68,7 +87,6 @@ function CustomCursor() {
   return (
     <div 
       className={cursorClasses}
-      // We now use left and top directly from state.
       style={{
         left: `${position.x}px`,
         top: `${position.y}px`,

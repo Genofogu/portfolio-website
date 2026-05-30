@@ -21,7 +21,7 @@ function FluidFooter() {
       <div className="blobs-container">
         {blobs}
       </div>
-      
+
       {/* The content sits on top of the animation */}
       <div className="fluid-footer__content">
         <div className="footer-links">
@@ -33,13 +33,13 @@ function FluidFooter() {
           </div>
           <div>
             <b>Connect</b>
-            <a href="https://github.com/your-username" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <a href="https://linkedin.com/in/your-username" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-            <a href="https://instagram.com/your-username" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a href="https://github.com/genofogu" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="https://linkedin.com/in/genofogu" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="https://instagram.com/genofogu" target="_blank" rel="noopener noreferrer">Instagram</a>
           </div>
         </div>
         <div className="footer-credits">
-          <p>© {currentYear} Your Name. All rights reserved.</p>
+          <p>© {currentYear} Genofogu. All rights reserved.</p>
         </div>
       </div>
 

@@ -1,39 +1,65 @@
 @use 'variables' as *;
 
-// ============================================================
-// THEME: Generate CSS custom properties for each theme
-// ============================================================
-body[data-theme="dark"] {
-  @include themify(dark);
+// Generate Theme Classes dynamically based on the map
+@each $theme-name, $theme-values in $themes {
+  body[data-theme="#{$theme-name}"] {
+    @include themify($theme-name);
+  }
 }
 
-body[data-theme="light"] {
-  @include themify(light);
-}
-
-// Default to dark theme if no data-theme attribute is set yet
+// Default fallback
 body:not([data-theme]) {
-  @include themify(dark);
+  @include themify(geno-dark);
 }
 
-// ============================================================
-// GLOBAL: Base styles that apply site-wide
-// ============================================================
+// Global Cursor and Font Settings
 *, *::before, *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+// Scoped cursor hiding when custom cursor is active
+body.custom-cursor-active {
+  &, *, *::before, *::after, a, button, input, textarea, select {
+    cursor: none !important;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+
+  @include respond(tablet) { font-size: 15px; }
+  @include respond(mobile) { font-size: 14px; }
+  @include respond(2k) { font-size: 18px; }
+  @include respond(4k) { font-size: 22px; }
+}
+
 body {
   background-color: var(--color-background);
   color: var(--color-text-primary);
-  font-family: 'Space Grotesk', sans-serif;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  transition: background-color 0.4s ease, color 0.4s ease;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  line-height: 1.6;
 }
 
+// Global Containers
+.g-container {
+  width: 100%;
+  max-width: $container-max-width;
+  margin: 0 auto;
+  padding-inline: clamp(1.5rem, 5vw, 4rem);
+}
+
+.g-section {
+  padding-block: clamp(3rem, 8vh, 8rem);
+}
+
+// Typographical Reset
 a {
   color: var(--color-accent-primary);
   text-decoration: none;
@@ -44,33 +70,61 @@ a {
   }
 }
 
-// ============================================================
-// SCHEDULER MODULE: Scoped layout styles
-// ============================================================
-.scheduler-app {
-  display: grid;
-  grid-template-columns: 250px 1fr;
-  grid-template-rows: auto 1fr;
-  grid-template-areas:
-    "sidebar header"
-    "sidebar main";
-  height: 100vh;
-  background-color: var(--color-background);
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.2;
+  font-weight: 700;
   color: var(--color-text-primary);
-  font-family: 'Poppins', sans-serif;
 }
 
-// Assign components to the grid areas
-.scheduler-sidebar {
-  grid-area: sidebar;
+p {
+  line-height: 1.7;
+  color: var(--color-text-secondary);
 }
 
-.scheduler-header {
-  grid-area: header;
+button, input, textarea, select {
+  font-family: inherit;
 }
 
-.scheduler-main-content {
-  grid-area: main;
-  padding: 2rem;
-  overflow-y: auto; // Allow main content to scroll if it's long
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+// Utilities
+.gradient-text {
+  @include gradient-text();
+}
+
+.glass-card {
+  @include glass();
+  border-radius: 16px;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: var(--color-border-hover);
+    background: var(--color-card-hover);
+  }
+}
+
+// Scrollbar
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-background-secondary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-accent-primary);
+  border-radius: 4px;
+  opacity: 0.5;
+  &:hover {
+    background: var(--color-accent-hover);
+  }
+}
+
+::selection {
+  background: var(--color-accent-primary);
+  color: #fff;
 }

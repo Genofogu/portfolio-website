@@ -87,7 +87,7 @@
 
 .card_content > a {
   all: unset;
-  cursor: none; // Use our custom cursor
+  cursor: pointer; // Fallback to pointer if custom cursor is disabled
   width: 90%;
   padding-block: 0.8rem;
   background-color: color-mix(in srgb, var(--color-text-primary) 5%, transparent);
