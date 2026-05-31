@@ -89,10 +89,10 @@ function IDEPage() {
       >
         <div className="g-container">
           <div className="ide-hero__content">
-            <span className="badge">CortexIDE v1.0.0</span>
-            <h1 className="gradient-text">CortexIDE: The Developer Sandbox of the Future</h1>
+            <span className="badge">Geno's IDE v1.0.0</span>
+            <h1 className="gradient-text">Geno's IDE: The Developer Sandbox of the Future</h1>
             <p className="ide-hero__subtitle">
-              A premium, browser-based development environment built on Antigravity mechanics.
+              A premium, browser-based development environment built on Genofogu mechanics.
               Accelerated runtimes, advanced AI context models, and modern theme adaptations.
             </p>
             <div className="ide-hero__ctas">
@@ -111,7 +111,7 @@ function IDEPage() {
                 <div className="dot red"></div>
                 <div className="dot yellow"></div>
                 <div className="dot green"></div>
-                <span className="title">cortex_ide_editor.js — CortexIDE</span>
+                <span className="title">geno's_ide_editor.js — Geno's IDE</span>
               </div>
               <div className="ide-mockup-content">
                 <div className="sidebar-mock">
@@ -123,7 +123,7 @@ function IDEPage() {
                 <div className="editor-mock">
                   <div className="editor-row">
                     <span className="line-num">1</span>
-                    <span className="code-text"><span className="keyword">import</span> &#123; IDE &#125; <span className="keyword">from</span> <span className="string">'cortex-core'</span>;</span>
+                    <span className="code-text"><span className="keyword">import</span> &#123; IDE &#125; <span className="keyword">from</span> <span className="string">'geno's-core'</span>;</span>
                   </div>
                   <div className="editor-row">
                     <span className="line-num">2</span>
@@ -299,7 +299,7 @@ function IDEPage() {
       >
         <div className="g-container">
           <div className="cta-box glass-card">
-            <h2>Launch CortexIDE Now</h2>
+            <h2>Launch Geno's IDE Now</h2>
             <p>Unlock the sandbox. Experience zero-friction compiler execution, dynamic theme adaptations, and integrated AI.</p>
             <div className="cta-buttons">
               <a href="#editor-preview" className="cta-btn primary">
