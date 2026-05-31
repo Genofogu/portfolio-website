@@ -1,19 +1,19 @@
 export const projectsData = [
   {
-    slug: 'soulwake',
-    title: "SoulWake",
+    slug: 'vespera',
+    title: "Vespera",
     subtitle: "AI-Powered Daily Productivity Companion",
-    heroImage: "/placeholders/soulwake-bg.png",
+    heroImage: "/placeholders/vespera-bg.png",
     category: "AI Systems",
     tags: ["React", "Express", "OpenAI", "Supabase", "SCSS"],
     summary: "Built an intelligent productivity hub featuring automated daily goal generation, habit tracking, and responsive scheduling to maximize focus.",
-    githubUrl: "https://github.com/genofogu/soulwake",
-    liveUrl: "https://soulwake.app",
+    githubUrl: "https://github.com/genofogu/vespera",
+    liveUrl: "https://vespera.app",
     sections: [
       {
         title: "The Vision",
         content: [
-          "SoulWake was born from the need to unify disjointed productivity tools. The goal was to build a single hub that not only tracks tasks but actively helps plan them using AI."
+          "Vespera was born from the need to unify disjointed productivity tools. The goal was to build a single hub that not only tracks tasks but actively helps plan them using AI."
         ]
       },
       {

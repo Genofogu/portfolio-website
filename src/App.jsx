@@ -1,22 +1,29 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { AuthProvider } from './context/AuthContext';
-import { ThemeProvider } from './context/ThemeContext';
-import ProtectedRoute from './components/ProtectedRoute';
-import MainLayout from './components/MainLayout';
-import CustomCursor from './components/CustomCursor/CustomCursor'; // Preload cursor
+import { AuthProvider } from './features/auth/AuthContext';
+import { ThemeProvider } from './features/theme/ThemeProvider';
+import ProtectedRoute from './features/auth/ProtectedRoute';
+import MainLayout from './features/shared/MainLayout';
+import CustomCursor from './features/shared/CustomCursor'; // Preload cursor
 
 // Lazy Loaded Pages
-const HomePage = lazy(() => import('./pages/HomePage'));
-const AboutPage = lazy(() => import('./pages/AboutPage'));
-const ContactPage = lazy(() => import('./pages/ContactPage'));
-const PlaygroundPage = lazy(() => import('./pages/PlaygroundPage'));
-const PlaygroundEditorPage = lazy(() => import('./pages/PlaygroundEditorPage'));
-const JsGamePage = lazy(() => import('./pages/JsGamePage'));
-const GamePlayPage = lazy(() => import('./pages/GamePlayPage'));
-const CaseStudyPage = lazy(() => import('./pages/CaseStudyPage'));
-const AuthPage = lazy(() => import('./pages/LoginPage'));
-const Scheduler = lazy(() => import('./scheduler/Scheduler'));
+const HomePage = lazy(() => import('./features/home/HomePage'));
+const AboutPage = lazy(() => import('./features/about/AboutPage'));
+const ProjectsPage = lazy(() => import('./features/projects/ProjectsPage'));
+const ContactPage = lazy(() => import('./features/contact/ContactPage'));
+const IDEPage = lazy(() => import('./features/ide/IDEPage'));
+const IDEEditorPage = lazy(() => import('./features/ide/IDEEditorPage'));
+const JsGamePage = lazy(() => import('./features/games/GameHub'));
+const GamePlayPage = lazy(() => import('./features/games/GamePage'));
+const CaseStudyPage = lazy(() => import('./features/projects/CaseStudyPage'));
+const AuthPage = lazy(() => import('./features/auth/LoginPage'));
+const RegisterPage = lazy(() => import('./features/auth/RegisterPage'));
+
+// Dashboard Pages
+const DashboardLayout = lazy(() => import('./features/dashboard/DashboardLayout'));
+const DashboardPage = lazy(() => import('./features/dashboard/DashboardPage'));
+const TasksPage = lazy(() => import('./features/dashboard/TasksPage'));
+const StatsPage = lazy(() => import('./features/dashboard/StatsPage'));
 
 // Loading Fallback
 const LoadingScreen = () => (
@@ -36,13 +43,13 @@ function App() {
             <Route element={<MainLayout />}>
               <Route path="/" element={<HomePage />} />
               <Route path="/about" element={<AboutPage />} />
-              <Route path="/projects" element={<Navigate to="/#portfolio" replace />} />
+              <Route path="/projects" element={<ProjectsPage />} />
               <Route path="/contact" element={<ContactPage />} />
               
               <Route path="/case-study/:id" element={<CaseStudyPage />} />
               
-              <Route path="/playground" element={<PlaygroundPage />} />
-              <Route path="/playground/editor" element={<PlaygroundEditorPage />} />
+              <Route path="/ide" element={<IDEPage />} />
+              <Route path="/ide/editor" element={<IDEEditorPage />} />
               
               <Route path="/js-game" element={<JsGamePage />} />
               <Route path="/js-game/:gameId" element={<GamePlayPage />} />
@@ -50,17 +57,25 @@ function App() {
 
             {/* Auth Routes */}
             <Route path="/login" element={<AuthPage />} />
+            <Route path="/register" element={<RegisterPage />} />
 
-            {/* Protected Modular App Routes (No MainLayout wrapper) */}
+            {/* Protected Dashboard Routes (No MainLayout wrapper) */}
             <Route 
-              path="/scheduler/*" 
+              path="/dashboard" 
               element={
                 <ProtectedRoute>
                   <CustomCursor />
-                  <Scheduler />
+                  <DashboardLayout />
                 </ProtectedRoute>
-              } 
-            />
+              }
+            >
+              <Route index element={<DashboardPage />} />
+              <Route path="tasks" element={<TasksPage />} />
+              <Route path="stats" element={<StatsPage />} />
+            </Route>
+
+            {/* Legacy Redirect */}
+            <Route path="/scheduler/*" element={<Navigate to="/dashboard" replace />} />
 
             {/* Catch-all redirect */}
             <Route path="*" element={<Navigate to="/" replace />} />

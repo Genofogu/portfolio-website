@@ -1,8 +1,0 @@
-// --- All @use rules must come first ---
-@use 'base/variables';
-@use 'base/base';
-@use 'components/Sidebar';
-@use 'components/Header';
-
-// --- All @import rules must come after @use ---
-@import 'react-big-calendar/lib/css/react-big-calendar.css';

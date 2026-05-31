@@ -1,3 +1,4 @@
+@use 'sass:map';
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
 
 $bp-mobile: 480px;
@@ -10,6 +11,46 @@ $bp-4k: 3840px;
 $container-max-width: 1200px;
 
 $themes: (
+  genofogu-legacy: (
+    color-background: #000000,
+    color-background-secondary: #0a0000,
+    color-surface: #150202,
+    color-text-primary: #ffffff,
+    color-text-secondary: #e5e7eb,
+    color-text-muted: #9ca3af,
+    color-accent-primary: #b91c1c, // Dark red accent
+    color-accent-secondary: #ea580c, // Burnt orange highlight
+    color-accent-tertiary: #06b6d4, // Cyan glow
+    color-accent-hover: #ef4444,
+    color-border: rgba(185, 28, 28, 0.2),
+    color-border-hover: rgba(234, 88, 12, 0.4),
+    color-card-background: rgba(21, 2, 2, 0.6),
+    color-card-hover: rgba(40, 5, 5, 0.8),
+    color-glow: rgba(6, 182, 212, 0.4), // Cyan glow
+    color-overlay: rgba(0, 0, 0, 0.9),
+    color-gradient-start: #b91c1c,
+    color-gradient-end: #ea580c
+  ),
+  cyber-neon: (
+    color-background: #000000,
+    color-background-secondary: #08000a,
+    color-surface: #12011a,
+    color-text-primary: #ffffff,
+    color-text-secondary: #e5e7eb,
+    color-text-muted: #a3a3a3,
+    color-accent-primary: #ec4899, // Neon Pink
+    color-accent-secondary: #06b6d4, // Cyan
+    color-accent-tertiary: #a855f7, // Purple
+    color-accent-hover: #f472b6,
+    color-border: rgba(236, 72, 153, 0.2),
+    color-border-hover: rgba(6, 182, 212, 0.4),
+    color-card-background: rgba(18, 1, 26, 0.6),
+    color-card-hover: rgba(30, 2, 45, 0.8),
+    color-glow: rgba(6, 182, 212, 0.4),
+    color-overlay: rgba(0, 0, 0, 0.9),
+    color-gradient-start: #ec4899,
+    color-gradient-end: #06b6d4
+  ),
   geno-dark: (color-background: #020617,
     color-background-secondary: #0f172a,
     color-surface: #1e293b,
@@ -28,7 +69,7 @@ $themes: (
     color-overlay: rgba(2, 6, 23, 0.9),
     color-gradient-start: #0ea5e9,
     color-gradient-end: #3b82f6),
-  soulwake: (color-background: #1e1b4b,
+  vespera: (color-background: #1e1b4b,
     color-background-secondary: #2e1065,
     color-surface: #4c1d95,
     color-text-primary: #f5f3ff,
@@ -157,7 +198,7 @@ $themes: (
 );
 
 @mixin themify($theme-name) {
-  @each $key, $value in map-get($themes, $theme-name) {
+  @each $key, $value in map.get($themes, $theme-name) {
     --#{$key}: #{$value};
   }
 }

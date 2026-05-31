@@ -2,27 +2,44 @@
 @use 'base/variables';
 @use 'base/base';
 
-// Layout & Global Components
-@use 'components/Header';
-@use 'components/FluidFooter';
-@use 'components/CustomCursor';
-@use 'components/ThemeToggle';
+// Shared UI & Layout
+@use 'shared/Header';
+@use 'shared/Footer';
+@use 'shared/CustomCursor';
+@use 'theme/ThemeSwitcher';
 
-// Layout Pages
-@use 'components/Hero';
-@use 'components/Portfolio';
-@use 'components/SocialCards';
-@use 'components/TimeLapseSection';
+// Home Feature
+@use 'home/Hero';
+@use 'home/Portfolio';
+@use 'home/SocialCards';
+@use 'home/TimeLapseSection';
+@use 'home/Interactive3DSection';
 
-// Individual Pages
-@use 'components/AboutPage';
-@use 'components/ContactPage';
-@use 'components/PlaygroundPage';
-@use 'components/GameHub';
-@use 'components/CaseStudyPage';
+// About Feature
+@use 'about/AboutPage';
 
-// Old Components to remove/refactor eventually but kept for safety
-@use 'components/About'; // for old references
-@use 'components/Interactive3DSection';
-@use 'components/CodePlayground';
-@use 'components/AuthForm';
+// Projects Feature
+@use 'projects/ProjectsPage';
+@use 'projects/CaseStudyPage';
+
+// Contact Feature
+@use 'contact/ContactPage';
+
+// IDE Feature
+@use 'ide/IDEPage';
+@use 'ide/CodePlayground';
+
+// Games Feature
+@use 'games/GameHub';
+@use 'games/PlatformRunner';
+
+// Dashboard / Scheduler Feature
+@use 'dashboard/Sidebar';
+@use 'dashboard/Header' as dbHeader;
+@use 'dashboard/CalendarView';
+@use 'dashboard/TaskForm';
+@use 'dashboard/TaskItem';
+@use 'dashboard/TaskList';
+
+// Auth Feature
+@use 'auth/AuthForm';
