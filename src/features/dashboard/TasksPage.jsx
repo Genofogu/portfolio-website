@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 const TasksPage = () => {
   const [tasks, setTasks] = useState(() => {
-    const saved = localStorage.getItem('genofogu-tasks');
+    const saved = localStorage.getItem('geno-tasks');
     return saved ? JSON.parse(saved) : [
       { id: 1, title: 'Complete MCA Assignment', category: 'Study', priority: 'High', completed: false, dueDate: new Date().toISOString().split('T')[0] },
       { id: 2, title: 'Deploy RAG update', category: 'Work', priority: 'High', completed: false, dueDate: new Date().toISOString().split('T')[0] },
@@ -19,7 +19,7 @@ const TasksPage = () => {
   const [categoryFilter, setCategoryFilter] = useState('All');
 
   useEffect(() => {
-    localStorage.setItem('genofogu-tasks', JSON.stringify(tasks));
+    localStorage.setItem('geno-tasks', JSON.stringify(tasks));
   }, [tasks]);
 
   const addTask = (e) => {

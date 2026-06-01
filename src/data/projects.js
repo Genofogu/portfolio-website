@@ -7,7 +7,7 @@ export const projectsData = [
     category: "AI Systems",
     tags: ["React", "Express", "OpenAI", "Supabase", "SCSS"],
     summary: "Built an intelligent productivity hub featuring automated daily goal generation, habit tracking, and responsive scheduling to maximize focus.",
-    githubUrl: "https://github.com/genofogu/vespera",
+    githubUrl: "https://github.com/geno/vespera",
     liveUrl: "https://vespera.app",
     sections: [
       {
@@ -41,7 +41,7 @@ export const projectsData = [
     category: "AI Systems",
     tags: ["Python", "LangChain", "Pinecone", "HuggingFace"],
     summary: "Developed a context-aware AI assistant capable of answering questions based on proprietary document embeddings injected into the LLM context window.",
-    githubUrl: "https://github.com/genofogu/rag-assistant",
+    githubUrl: "https://github.com/geno/rag-assistant",
     liveUrl: "#",
     sections: [
       {
@@ -67,7 +67,7 @@ export const projectsData = [
     category: "AI Systems",
     tags: ["Python", "FastAPI", "React", "Elasticsearch"],
     summary: "A robust semantic search engine that understands intent rather than just keywords, processing millions of tokens in milliseconds.",
-    githubUrl: "https://github.com/genofogu",
+    githubUrl: "https://github.com/geno",
     liveUrl: "#",
     sections: []
   },
@@ -79,7 +79,7 @@ export const projectsData = [
     category: "Data Science",
     tags: ["Python", "Scikit-learn", "Pandas", "Flask"],
     summary: "Engineered a collaborative filtering recommendation system that suggests custom travel itineraries based on user preference clustering.",
-    githubUrl: "https://github.com/genofogu",
+    githubUrl: "https://github.com/geno",
     liveUrl: "#",
     sections: []
   },
@@ -91,7 +91,7 @@ export const projectsData = [
     category: "Data Science",
     tags: ["Python", "Docker", "MLflow", "AWS"],
     summary: "An optimized MLOps pipeline for predicting customer churn, featuring automated model retraining, experiment tracking, and high-availability deployment.",
-    githubUrl: "https://github.com/genofogu/churn-prediction",
+    githubUrl: "https://github.com/geno/churn-prediction",
     liveUrl: "#",
     sections: []
   },
@@ -103,7 +103,7 @@ export const projectsData = [
     category: "Cloud",
     tags: ["Terraform", "AWS", "GCP", "Docker", "CI/CD"],
     summary: "Designed and deployed scalable, load-balanced containerized applications across AWS and GCP using infrastructure-as-code principles.",
-    githubUrl: "https://github.com/genofogu",
+    githubUrl: "https://github.com/geno",
     liveUrl: "#",
     sections: []
   }

@@ -6,7 +6,7 @@ const StatsPage = () => {
 
   useEffect(() => {
     // Load Tasks
-    const savedTasks = localStorage.getItem('genofogu-tasks');
+    const savedTasks = localStorage.getItem('geno-tasks');
     const tasks = savedTasks ? JSON.parse(savedTasks) : [];
     const total = tasks.length;
     const completed = tasks.filter(t => t.completed).length;
@@ -16,7 +16,7 @@ const StatsPage = () => {
     setTaskStats({ total, completed, active, rate });
 
     // Load Habits
-    const savedHabits = localStorage.getItem('genofogu-habits');
+    const savedHabits = localStorage.getItem('geno-habits');
     const habits = savedHabits ? JSON.parse(savedHabits) : [
       { id: 1, name: 'Read Research Papers', doneToday: true, streak: 4, history: [true, false, true, true, true, false, true] },
       { id: 2, name: 'Cloud Certification Prep', doneToday: false, streak: 2, history: [false, true, false, true, false, false, false] }

@@ -1,0 +1,30 @@
+IDE Platform:
+CortexIDE (Realname: PlayGround)
+
+Playground should be more interactive,a fututre ide where user can create and run code and use other tools.
+We should also add a blog section where i can write articles about my projects and experiences. -- date 31/5/2026
+
+---------------------------------------------------------------------------------------------------------------------
+
+Productivity Platform:
+Vespera (Realname: Soulwake)
+
+Soulwake : A platform where i can track my life and improve myself.Where i can track my habits,mood,health,education and other things.
+Also i can set goals and track my progress.
+
+---------------------------------------------------------------------------------------------------------------------
+
+Company Ecosystem:
+Genofogu
+
+Genofogu : A platform where i can showcase my skills,projects and other things.
+Where i can share my knowledge and experiences.
+
+---------------------------------------------------------------------------------------------------------------------
+
+Reserved Future Products:
+Aetheris Cloud
+Aetheris flow
+Kortex-Core
+
+---------------------------------------------------------------------------------------------------------------------

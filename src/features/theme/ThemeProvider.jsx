@@ -5,12 +5,12 @@ const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState(() => {
-    const savedTheme = localStorage.getItem('genofogu-theme');
-    return savedTheme || 'genofogu-legacy';
+    const savedTheme = localStorage.getItem('geno-theme');
+    return savedTheme || 'geno-legacy';
   });
 
   useEffect(() => {
-    localStorage.setItem('genofogu-theme', theme);
+    localStorage.setItem('geno-theme', theme);
     document.body.setAttribute('data-theme', theme);
   }, [theme]);
 

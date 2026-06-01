@@ -1,5 +1,5 @@
 export const themesList = [
-  { id: 'genofogu-legacy', name: 'Genofogu Legacy' },
+  { id: 'geno-legacy', name: 'Geno Legacy' },
   { id: 'geno-dark', name: 'Geno Dark' },
   { id: 'vespera', name: 'Vespera' },
   { id: 'inferno', name: 'Inferno' },

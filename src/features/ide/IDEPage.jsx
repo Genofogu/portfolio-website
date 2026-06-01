@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import CodePlayground from './CodePlayground';
 import useIntersectionObserver from '../../hooks/useIntersectionObserver';
 
@@ -92,16 +93,16 @@ function IDEPage() {
             <span className="badge">Geno's IDE v1.0.0</span>
             <h1 className="gradient-text">Geno's IDE: The Developer Sandbox of the Future</h1>
             <p className="ide-hero__subtitle">
-              A premium, browser-based development environment built on Genofogu mechanics.
+              A premium, browser-based development environment built on Geno mechanics.
               Accelerated runtimes, advanced AI context models, and modern theme adaptations.
             </p>
             <div className="ide-hero__ctas">
               <a href="#editor-preview" className="hero-cta-btn primary">
                 <i className="fa-solid fa-circle-play"></i> Try In Browser
               </a>
-              <a href="#" target="_blank" rel="noreferrer" className="hero-cta-btn secondary">
+              <Link to="/github" className="hero-cta-btn secondary">
                 <i className="fa-brands fa-github"></i> Clone Sandbox CLI
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -305,9 +306,9 @@ function IDEPage() {
               <a href="#editor-preview" className="cta-btn primary">
                 Launch Web Editor
               </a>
-              <a href="#" target="_blank" rel="noreferrer" className="cta-btn secondary">
+              <Link to="/github" className="cta-btn secondary">
                 View Source Repository
-              </a>
+              </Link>
             </div>
           </div>
         </div>

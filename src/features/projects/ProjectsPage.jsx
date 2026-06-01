@@ -107,12 +107,14 @@ function ProjectsPage() {
                     </Link>
 
                     <div className="project-card__links">
-                      {project.githubUrl && project.githubUrl !== '#' && (
-                        <a href={project.githubUrl} target="_blank" rel="noreferrer" title="GitHub Repository">
-                          <i className="fa-brands fa-github"></i>
-                        </a>
-                      )}
-                      {project.liveUrl && project.liveUrl !== '#' && (
+                      <Link to="/github" title="GitHub Repository">
+                        <i className="fa-brands fa-github"></i>
+                      </Link>
+                      {project.liveUrl === '#' ? (
+                        <Link to="/coming-soon" title="Under Development">
+                          <i className="fa-solid fa-arrow-up-right-from-square" style={{ opacity: 0.6 }}></i>
+                        </Link>
+                      ) : (
                         <a href={project.liveUrl} target="_blank" rel="noreferrer" title="Live Deployment">
                           <i className="fa-solid fa-arrow-up-right-from-square"></i>
                         </a>

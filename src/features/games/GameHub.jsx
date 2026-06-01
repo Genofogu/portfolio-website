@@ -38,6 +38,22 @@ const gamesList = [
     description: "Dodge falling asteroids in deep space with your custom starship.",
     thumbnail: "/placeholders/space-bg.png",
     highScoreKey: "starshipHighScore",
+  },
+  {
+    id: "multiplayer-chess",
+    title: "Multiplayer Chess",
+    description: "Real-time online chess matches with custom timer configurations and voice links.",
+    thumbnail: "/placeholders/chess-bg.png",
+    highScoreKey: "chessHighScore",
+    inDevelopment: true
+  },
+  {
+    id: "space-rogue-3d",
+    title: "3D Space Rogue",
+    description: "Explore procedurally-generated asteroid fields and engage in space tactical battles.",
+    thumbnail: "/placeholders/rogue-bg.png",
+    highScoreKey: "rogueHighScore",
+    inDevelopment: true
   }
 ];
 

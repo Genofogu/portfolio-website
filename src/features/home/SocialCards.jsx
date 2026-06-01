@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 
 const socialData = [
   {
@@ -6,7 +7,7 @@ const socialData = [
     icon: "fa-brands fa-github",
     metric: "Open Source",
     value: "Projects",
-    link: "https://github.com/genofogu",
+    link: "/github",
     callToAction: "Explore Code"
   },
   {
@@ -14,7 +15,7 @@ const socialData = [
     icon: "fa-brands fa-linkedin",
     metric: "Professional",
     value: "Network",
-    link: "https://linkedin.com/in/genofogu",
+    link: "https://linkedin.com/in/geno",
     callToAction: "Connect"
   },
   {
@@ -22,7 +23,7 @@ const socialData = [
     icon: "fa-brands fa-instagram",
     metric: "Creative",
     value: "Journal",
-    link: "https://instagram.com/genofogu",
+    link: "https://instagram.com/geno",
     callToAction: "Follow"
   }
 ];
@@ -62,10 +63,17 @@ function SocialCards() {
               <i className={social.icon}></i>
               <h2>{social.name}</h2>
               <p>{social.metric} <br/><span>{social.value}</span></p>
-              <a href={social.link} target="_blank" rel="noopener noreferrer">
-                <span>{social.callToAction}</span>
-                <i className="fa-solid fa-arrow-right"></i>
-              </a>
+              {social.link.startsWith('/') ? (
+                <Link to={social.link}>
+                  <span>{social.callToAction}</span>
+                  <i className="fa-solid fa-arrow-right"></i>
+                </Link>
+              ) : (
+                <a href={social.link} target="_blank" rel="noopener noreferrer">
+                  <span>{social.callToAction}</span>
+                  <i className="fa-solid fa-arrow-right"></i>
+                </a>
+              )}
             </div>
           </div>
         ))}

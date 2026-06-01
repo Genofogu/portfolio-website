@@ -12,7 +12,7 @@ function DashboardPage() {
 
   useEffect(() => {
     // Load tasks from localStorage
-    const savedTasks = localStorage.getItem('genofogu-tasks');
+    const savedTasks = localStorage.getItem('geno-tasks');
     if (savedTasks) {
       setTasks(JSON.parse(savedTasks));
     } else {
@@ -22,11 +22,11 @@ function DashboardPage() {
         { id: 3, title: 'Write architectural design', category: 'Work', priority: 'Medium', completed: true, dueDate: new Date().toISOString().split('T')[0] }
       ];
       setTasks(defaultTasks);
-      localStorage.setItem('genofogu-tasks', JSON.stringify(defaultTasks));
+      localStorage.setItem('geno-tasks', JSON.stringify(defaultTasks));
     }
 
     // Load habits from localStorage
-    const savedHabits = localStorage.getItem('genofogu-habits');
+    const savedHabits = localStorage.getItem('geno-habits');
     if (savedHabits) {
       setHabits(JSON.parse(savedHabits));
     } else {
@@ -35,14 +35,14 @@ function DashboardPage() {
         { id: 2, name: 'Cloud Certification Prep', doneToday: false, streak: 2, history: [false, true, false, true, false, false, false] }
       ];
       setHabits(defaultHabits);
-      localStorage.setItem('genofogu-habits', JSON.stringify(defaultHabits));
+      localStorage.setItem('geno-habits', JSON.stringify(defaultHabits));
     }
   }, []);
 
   const toggleTaskCompletion = (id) => {
     const updated = tasks.map(t => t.id === id ? { ...t, completed: !t.completed } : t);
     setTasks(updated);
-    localStorage.setItem('genofogu-tasks', JSON.stringify(updated));
+    localStorage.setItem('geno-tasks', JSON.stringify(updated));
   };
 
   const toggleHabitToday = (id) => {
@@ -57,7 +57,7 @@ function DashboardPage() {
       return h;
     });
     setHabits(updated);
-    localStorage.setItem('genofogu-habits', JSON.stringify(updated));
+    localStorage.setItem('geno-habits', JSON.stringify(updated));
   };
 
   // Filter tasks to show active ones

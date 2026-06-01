@@ -18,6 +18,8 @@ const GamePlayPage = lazy(() => import('./features/games/GamePage'));
 const CaseStudyPage = lazy(() => import('./features/projects/CaseStudyPage'));
 const AuthPage = lazy(() => import('./features/auth/LoginPage'));
 const RegisterPage = lazy(() => import('./features/auth/RegisterPage'));
+const GitHubPage = lazy(() => import('./features/github/GitHubPage'));
+const ComingSoonPage = lazy(() => import('./features/comingsoon/ComingSoonPage'));
 
 // Dashboard Pages
 const DashboardLayout = lazy(() => import('./features/dashboard/DashboardLayout'));
@@ -53,6 +55,9 @@ function App() {
               
               <Route path="/js-game" element={<JsGamePage />} />
               <Route path="/js-game/:gameId" element={<GamePlayPage />} />
+
+              <Route path="/github" element={<GitHubPage />} />
+              <Route path="/coming-soon" element={<ComingSoonPage />} />
             </Route>
 
             {/* Auth Routes */}

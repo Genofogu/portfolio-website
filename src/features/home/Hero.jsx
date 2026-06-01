@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 
 function Hero() {
   const heroRef = useRef(null);
@@ -97,9 +98,9 @@ function Hero() {
             <a href="#portfolio" className="hero__cta-button primary">
               View My Work
             </a>
-            <a href="https://github.com/genofogu" target="_blank" rel="noreferrer" className="hero__cta-button secondary">
+            <Link to="/github" className="hero__cta-button secondary">
               <i className="fa-brands fa-github"></i> GitHub
-            </a>
+            </Link>
           </div>
         </div>
       </div>

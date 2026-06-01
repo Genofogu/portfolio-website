@@ -44,12 +44,14 @@ function Portfolio() {
                 Details →
               </Link>
               <div className="portfolio-card__links">
-                {study.githubUrl && study.githubUrl !== '#' && (
-                  <a href={study.githubUrl} target="_blank" rel="noreferrer" title="View Source">
-                    <i className="fa-brands fa-github"></i>
-                  </a>
-                )}
-                {study.liveUrl && study.liveUrl !== '#' && (
+                <Link to="/github" title="View Source">
+                  <i className="fa-brands fa-github"></i>
+                </Link>
+                {study.liveUrl === '#' ? (
+                  <Link to="/coming-soon" title="Under Development">
+                    <i className="fa-solid fa-arrow-up-right-from-square" style={{ opacity: 0.6 }}></i>
+                  </Link>
+                ) : (
                   <a href={study.liveUrl} target="_blank" rel="noreferrer" title="Live Demo">
                     <i className="fa-solid fa-arrow-up-right-from-square"></i>
                   </a>
