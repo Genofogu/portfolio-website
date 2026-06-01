@@ -132,7 +132,7 @@ function IDEPage() {
                   </div>
                   <div className="editor-row">
                     <span className="line-num">3</span>
-                    <span className="code-text"><span className="keyword">const</span> compiler = <span className="keyword">new</span> IDE.Compiler(&#123;</span>
+                    <span className="code-text"><span className="keyword">const</span> compiler = <span className="keyword">new</span> Geno's IDE.Compiler(&#123;</span>
                   </div>
                   <div className="editor-row">
                     <span className="line-num">4</span>
