@@ -120,7 +120,7 @@ function GitHubPage() {
             </div>
 
             <a 
-              href="https://github.com/geno" 
+              href="https://github.com/Genofogu" 
               target="_blank" 
               rel="noopener noreferrer" 
               className="github-cta-btn"

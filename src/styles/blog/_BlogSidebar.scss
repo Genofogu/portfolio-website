@@ -1,0 +1,58 @@
+@use '../base/variables' as *;
+
+.blog-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  .blog-sidebar__section {
+    @include glass;
+    padding: 28px;
+    border-radius: 28px;
+    border: 1px solid var(--color-border);
+
+    h2 {
+      margin-bottom: 18px;
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    p {
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+      margin-bottom: 18px;
+    }
+
+    .blog-sidebar__tags,
+    .sidebar-post-link,
+    .tag-pill {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .sidebar-post-link {
+      display: block;
+      padding: 12px 0;
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      span {
+        display: block;
+        font-weight: 700;
+        color: var(--color-text-primary);
+      }
+
+      small {
+        display: block;
+        margin-top: 4px;
+        color: var(--color-text-muted);
+      }
+    }
+  }
+}

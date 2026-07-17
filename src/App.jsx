@@ -21,6 +21,12 @@ const RegisterPage = lazy(() => import('./features/auth/RegisterPage'));
 const GitHubPage = lazy(() => import('./features/github/GitHubPage'));
 const ComingSoonPage = lazy(() => import('./features/comingsoon/ComingSoonPage'));
 
+// Blog Pages
+const BlogPage = lazy(() => import('./features/blog/BlogPage'));
+const BlogPostPage = lazy(() => import('./features/blog/BlogPostPage'));
+const BlogCategoryPage = lazy(() => import('./features/blog/BlogCategoryPage'));
+const BlogSearch = lazy(() => import('./features/blog/BlogSearch'));
+
 // Dashboard Pages
 const DashboardLayout = lazy(() => import('./features/dashboard/DashboardLayout'));
 const DashboardPage = lazy(() => import('./features/dashboard/DashboardPage'));
@@ -58,11 +64,17 @@ function App() {
 
               <Route path="/github" element={<GitHubPage />} />
               <Route path="/coming-soon" element={<ComingSoonPage />} />
+
+              {/* Blog Routes */}
+              <Route path="/blog" element={<BlogPage />} />
+              <Route path="/blog/:slug" element={<BlogPostPage />} />
+              <Route path="/blog/category/:category" element={<BlogCategoryPage />} />
+              <Route path="/blog/search" element={<BlogSearch />} />
             </Route>
 
-            {/* Auth Routes */}
-            <Route path="/login" element={<AuthPage />} />
-            <Route path="/register" element={<RegisterPage />} />
+            {/* Auth Routes redirected to Home */}
+            <Route path="/login" element={<Navigate to="/" replace />} />
+            <Route path="/register" element={<Navigate to="/" replace />} />
 
             {/* Protected Dashboard Routes (No MainLayout wrapper) */}
             <Route 

@@ -35,6 +35,7 @@ function Header() {
     { to: '/projects', label: 'Projects' },
     { to: '/ide', label: 'IDE' },
     { to: '/js-game', label: 'Games' },
+    { to: '/blog', label: 'Blog' },
     { to: '/contact', label: 'Contact' },
   ];
 
@@ -59,12 +60,6 @@ function Header() {
                 </Link>
               ))}
             </nav>
-
-            {user ? (
-              <button onClick={handleSignOut} className="header-button">Logout</button>
-            ) : (
-              <Link to="/login" className="header-button">Login</Link>
-            )}
 
             <ThemeSwitcher />
 

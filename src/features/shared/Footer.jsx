@@ -33,9 +33,9 @@ function Footer() {
           </div>
           <div>
             <b>Connect</b>
-            <a href="https://github.com/geno" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <a href="https://linkedin.com/in/geno" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-            <a href="https://instagram.com/geno" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a href="https://github.com/Genofogu" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="https://www.linkedin.com/in/genofogu/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="https://www.instagram.com/setwetgold" target="_blank" rel="noopener noreferrer">Instagram</a>
           </div>
         </div>
         <div className="footer-credits">

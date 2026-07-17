@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 
 function SocialLinks() {
   const links = [
-    { href: "/github", label: "GitHub", icon: "fa-brands fa-github" },
-    { href: "https://linkedin.com/in/geno", label: "LinkedIn", icon: "fa-brands fa-linkedin" },
-    { href: "https://instagram.com/geno", label: "Instagram", icon: "fa-brands fa-instagram" },
+    { href: "https://github.com/Genofogu", label: "GitHub", icon: "fa-brands fa-github" },
+    { href: "https://www.linkedin.com/in/genofogu/", label: "LinkedIn", icon: "fa-brands fa-linkedin" },
+    { href: "https://www.instagram.com/setwetgold", label: "Instagram", icon: "fa-brands fa-instagram" },
     { href: "mailto:geno@gmail.com", label: "Email", icon: "fa-solid fa-envelope" }
   ];
 

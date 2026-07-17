@@ -4,6 +4,7 @@ import Portfolio from './Portfolio';
 import SocialCards from './SocialCards';
 import Interactive3DSection from './Interactive3DSection';
 import TimeLapseSection from './TimeLapseSection';
+import LatestArticles from './LatestArticles';
 
 function HomePage() {
   return (
@@ -13,6 +14,7 @@ function HomePage() {
       <SocialCards /> 
       <Interactive3DSection />
       <TimeLapseSection />
+      <LatestArticles />
     </>
   );
 }

@@ -45,3 +45,16 @@
 
 // Auth Feature
 @use 'auth/AuthForm';
+
+// Home Latest Articles Section
+@use 'home/LatestArticles';
+
+// Blog Feature
+@use 'blog/BlogPage';
+@use 'blog/BlogHero';
+@use 'blog/BlogCard';
+@use 'blog/BlogSidebar';
+@use 'blog/BlogPost';
+@use 'blog/AuthorCard';
+@use 'blog/Newsletter';
+@use 'blog/Journal';

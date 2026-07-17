@@ -7,7 +7,7 @@ const socialData = [
     icon: "fa-brands fa-github",
     metric: "Open Source",
     value: "Projects",
-    link: "/github",
+    link: "https://github.com/Genofogu",
     callToAction: "Explore Code"
   },
   {
@@ -15,7 +15,7 @@ const socialData = [
     icon: "fa-brands fa-linkedin",
     metric: "Professional",
     value: "Network",
-    link: "https://linkedin.com/in/geno",
+    link: "https://www.linkedin.com/in/genofogu/",
     callToAction: "Connect"
   },
   {
@@ -23,7 +23,7 @@ const socialData = [
     icon: "fa-brands fa-instagram",
     metric: "Creative",
     value: "Journal",
-    link: "https://instagram.com/geno",
+    link: "https://www.instagram.com/setwetgold",
     callToAction: "Follow"
   }
 ];
