@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="preload" as="image" href="/textures/paper-texture.webp" type="image/webp" fetchpriority="high"
+    crossorigin="anonymous">
+  <link rel="icon" type="image/png" href="/favico.png" />
+  <link rel="apple-touch-icon" href="/favico.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#050510" />
+
+  <!-- SEO Meta Tags -->
+  <title>Genofogu — 3D Portfolio</title>
+  <meta name="description"
+    content="Genofogu's immersive 3D portfolio and creative technology experience. Explore interactive WebGL rooms, projects, and personal build logs." />
+  <meta name="author" content="Genofogu" />
+  <meta name="keywords"
+    content="Genofogu, Genofogu portfolio, 3D portfolio, web developer portfolio, 3D web development, Three.js developer, React portfolio, fullstack engineer, Inhaby, AI, WebGL" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph (Facebook, LinkedIn, Discord) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Genofogu — 3D Portfolio" />
+  <meta property="og:description"
+    content="Genofogu's immersive 3D portfolio and creative technology experience." />
+  <meta property="og:site_name" content="Genofogu 3D Experience" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Genofogu — 3D Portfolio" />
+  <meta name="twitter:description"
+    content="Genofogu's immersive 3D portfolio and creative technology experience." />
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Genofogu",
+        "alternateName": ["Geno", "Geno Futaba", "Genofogu Portfolio"],
+        "jobTitle": "Full-Stack Developer & Software Engineer",
+        "knowsAbout": ["React", "Three.js", "JavaScript", "TypeScript", "Node.js", "Supabase", "AI", "Cloud Architecture", "Inhaby"]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Genofogu 3D Portfolio",
+        "description": "Interactive 3D Developer Portfolio by Genofogu"
+      }
+    ]
+  </script>
+
+  <style>
+    /* Absolute SEO text hiding - completely accessible to search engines, invisible to users */
+    .sr-only-seo {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      padding: 0 !important;
+      margin: -1px !important;
+      overflow: hidden !important;
+      clip: rect(0, 0, 0, 0) !important;
+      white-space: nowrap !important;
+      border: 0 !important;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- SEO Fallback for WebGL SPAs -->
+  <div id="seo-content" class="sr-only-seo">
+    <header>
+      <h1>Genofogu | Creative 3D Web Developer & Software Engineer Portfolio</h1>
+      <p>Interactive, WebGL-powered portfolio showcasing full-stack applications, AI products, and engineering projects.</p>
+    </header>
+
+    <nav aria-label="Main Navigation">
+      <ul>
+        <li><a href="/">Home (The Corridor)</a></li>
+        <li><a href="/gallery">Gallery & Projects</a></li>
+        <li><a href="/about">About Me (The Studio)</a></li>
+        <li><a href="/contact">Contact & Socials</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <article id="home-corridor">
+        <header>
+          <h2>Experience the 3D Corridor: A Journey Through Code and Art</h2>
+        </header>
+        <section>
+          <h3>Welcome to the Genofogu Digital Universe</h3>
+          <p>
+            Welcome to the interactive 3D portfolio of <strong>Genofogu</strong>.
+            This website is an immersive, fully interactive WebGL experience bridging the gap between static web pages and cinematic, game-like experiences.
+          </p>
+        </section>
+      </article>
+
+      <article id="about-me">
+        <header>
+          <h2>About Genofogu: Full-Stack Developer & Product Builder</h2>
+        </header>
+        <section>
+          <h3>My Developer Journey</h3>
+          <p>
+            I build full-stack applications, explore AI models and cloud architecture, and craft real-world software like <strong>Inhaby</strong>.
+          </p>
+        </section>
+      </article>
+    </main>
+  </div>
+
+  <!-- Noscript strict fallback -->
+  <noscript>
+    Please enable JavaScript to experience the interactive 3D portfolio of Genofogu.
+  </noscript>
+
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+
+</html>

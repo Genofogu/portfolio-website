@@ -1,0 +1,53 @@
+// =============================================================================
+// DESIGN TOKENS - ITom Portfolio
+// =============================================================================
+
+// Colors mapped dynamically to CSS Variables
+$color-bg: var(--color-bg);
+$color-bg-secondary: var(--color-bg-secondary);
+$color-card: var(--color-bg-secondary);
+$color-panel: var(--color-panel);
+$color-border: var(--border-color);
+$color-text: var(--color-text);
+
+$color-neon-cyan: var(--color-neon-cyan);
+$color-neon-magenta: var(--color-neon-magenta);
+$color-neon-purple: var(--color-neon-magenta);
+$color-neon-blue: var(--color-neon-cyan);
+$color-neon-orange: var(--color-neon-magenta);
+
+// Retro compatibility / mapping standard variables
+$color-white: var(--color-text);
+$color-black: var(--color-bg);
+$color-gray: var(--color-bg-secondary);
+$color-neon-green: var(--color-neon-cyan);
+
+// Typography mapped dynamically
+$font-title: var(--font-title);
+$font-handwritten: var(--font-primary);
+$font-primary: var(--font-primary);
+$font-cyber: var(--font-title);
+$font-mono: 'Share Tech Mono', monospace;
+
+// Breakpoints
+$breakpoint-mobile: 480px;
+$breakpoint-tablet: 768px;
+$breakpoint-desktop: 1024px;
+$breakpoint-wide: 1440px;
+
+// Z-index layers
+$z-preloader: 100;
+$z-canvas: 1;
+$z-ui: 50;
+
+// Transitions
+$transition-fast: 0.2s ease;
+$transition-normal: 0.4s ease;
+$transition-slow: 0.8s ease;
+
+// Spacing
+$spacing-xs: 0.5rem;
+$spacing-sm: 1rem;
+$spacing-md: 2rem;
+$spacing-lg: 4rem;
+$spacing-xl: 8rem;

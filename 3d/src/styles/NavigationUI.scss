@@ -1,0 +1,691 @@
+// NavigationUI Styles - Cyberpunk HUD Edition
+
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.navigation-ui {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 100;
+
+    button,
+    .map-panel,
+    .audio-panel,
+    .menu-overlay {
+        pointer-events: auto;
+    }
+}
+
+// === BUTTONS BASE STYLE ===
+.nav-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background: rgba($color-panel, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba($color-neon-cyan, 0.3);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    overflow: visible;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4),
+                0 0 10px rgba($color-neon-cyan, 0.1);
+
+    &::before,
+    &::after {
+        display: none !important; // Disable the old paper texture and SVG shapes
+    }
+
+    &:hover {
+        transform: translateY(-2px) scale(1.05);
+        border-color: $color-neon-cyan;
+        box-shadow: 0 0 15px rgba($color-neon-cyan, 0.4),
+                    inset 0 0 5px rgba($color-neon-cyan, 0.2);
+        
+        svg {
+            stroke: $color-neon-cyan;
+            filter: drop-shadow(0 0 5px $color-neon-cyan);
+        }
+    }
+
+    &:active {
+        transform: translateY(1px) scale(0.98);
+    }
+
+    svg {
+        width: 22px;
+        height: 22px;
+        fill: none;
+        stroke: $color-text;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        z-index: 1;
+        transition: stroke 0.2s, filter 0.2s;
+    }
+}
+
+// === BACK BUTTON ===
+.back-btn {
+    position: fixed;
+    top: 24px;
+    left: 24px;
+    animation: fadeSlideDown 0.3s ease-out;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    border-color: rgba($color-neon-magenta, 0.4) !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4), 0 0 10px rgba($color-neon-magenta, 0.1) !important;
+
+    svg {
+        stroke: $color-text;
+    }
+
+    &:hover {
+        border-color: $color-neon-magenta !important;
+        box-shadow: 0 0 15px rgba($color-neon-magenta, 0.4),
+                    inset 0 0 5px rgba($color-neon-magenta, 0.2) !important;
+        
+        svg {
+            stroke: $color-neon-magenta !important;
+            filter: drop-shadow(0 0 5px $color-neon-magenta);
+        }
+    }
+
+    &.exiting {
+        transform: translateY(-100%);
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    @keyframes fadeSlideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}
+
+// === RIGHT SIDE CONTROLS ===
+.nav-controls {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    display: flex;
+    gap: 12px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    animation: slideDownEntrance 0.4s ease-out;
+
+    @keyframes slideDownEntrance {
+        from {
+            opacity: 0;
+            transform: translateY(-100%);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    &.menu-open {
+        transform: translateY(-100%);
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    &.ui-hidden {
+        transform: translateY(-120%);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+    }
+}
+
+// === HAMBURGER BUTTON ===
+.hamburger-btn {
+    .hamburger-icon {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        width: 20px;
+
+        span {
+            display: block;
+            height: 2px;
+            width: 100%;
+            background: $color-text;
+            border-radius: 2px;
+            transition: all 0.2s ease;
+        }
+    }
+
+    &:hover .hamburger-icon span {
+        background: $color-neon-cyan;
+        box-shadow: 0 0 5px $color-neon-cyan;
+    }
+}
+
+// === MAP PANEL (HOLOGRAPHIC BLUEPRINT) ===
+.map-panel {
+    position: fixed;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-100%);
+    width: 90%;
+    max-width: 500px;
+    border: 1px solid rgba($color-neon-cyan, 0.4);
+    border-radius: 8px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7),
+                0 0 30px rgba($color-neon-cyan, 0.2);
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+
+    &.open {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateX(-50%) translateY(0);
+    }
+
+    .map-content-clipped {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        padding: 20px;
+        padding-bottom: 30px;
+        background: rgba($color-panel, 0.9);
+        backdrop-filter: blur(16px);
+
+        &::before, &::after {
+            display: none !important;
+        }
+        clip-path: none !important; // Remove the old torn paper clip path
+    }
+
+    .map-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid rgba($color-neon-cyan, 0.2);
+
+        h3 {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: $color-neon-cyan;
+            font-family: $font-title;
+            text-shadow: 0 0 8px rgba($color-neon-cyan, 0.6);
+        }
+
+        .close-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            opacity: 0.8;
+
+            svg {
+                width: 14px;
+                height: 14px;
+                fill: none;
+                stroke: $color-neon-cyan;
+                stroke-width: 2.5;
+                stroke-linecap: round;
+            }
+
+            &:hover {
+                opacity: 1;
+                background: rgba($color-neon-cyan, 0.1);
+                border-color: $color-neon-cyan;
+                transform: scale(1.1);
+                box-shadow: 0 0 8px rgba($color-neon-cyan, 0.4);
+            }
+
+            &:active {
+                transform: scale(0.95);
+            }
+        }
+    }
+
+    .map-container {
+        position: relative;
+        width: 100%;
+        border-radius: 4px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        background: #050510;
+        
+        &::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(rgba(0, 245, 255, 0.03) 50%, rgba(0, 0, 0, 0.1) 50%),
+                        linear-gradient(90deg, rgba(0, 245, 255, 0.03) 50%, rgba(0, 0, 0, 0.1) 50%);
+            background-size: 8px 8px;
+            pointer-events: none;
+            z-index: 5;
+        }
+    }
+
+    .map-image {
+        display: block;
+        width: 100%;
+        height: auto;
+        pointer-events: none;
+        filter: hue-rotate(180deg) brightness(0.65) contrast(1.2);
+    }
+
+    .painted-map-layer {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+        filter: hue-rotate(180deg) brightness(1.2) drop-shadow(0 0 8px $color-neon-cyan);
+    }
+
+    .map-hover-zone {
+        position: absolute;
+        z-index: 2;
+        cursor: pointer;
+        background: transparent;
+        border: none;
+        padding: 0;
+        margin: 0;
+        outline: none;
+    }
+
+    .zone-about {
+        top: 0;
+        left: 0;
+        width: 30%;
+        height: 35%;
+        margin-top: 20%;
+        margin-left: 10%;
+    }
+
+    .zone-gallery {
+        bottom: 0;
+        left: 0;
+        width: 30%;
+        height: 35%;
+        margin-bottom: 8%;
+        margin-left: 10%;
+    }
+
+    .zone-contact {
+        top: 0;
+        right: 0;
+        width: 35%;
+        height: 25%;
+        margin-top: 10%;
+        margin-right: 5%;
+    }
+
+    .zone-studio {
+        bottom: 0;
+        right: 0;
+        width: 25%;
+        height: 40%;
+        margin-bottom: 19%;
+        margin-right: 15%;
+    }
+
+    .map-room-label {
+        position: absolute;
+        font-family: $font-title;
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: $color-neon-cyan;
+        pointer-events: none;
+        z-index: 4;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        text-shadow: 0 0 10px rgba(0, 245, 255, 0.7);
+
+        &.about {
+            top: 28%;
+            left: 26%;
+        }
+
+        &.gallery {
+            top: 94%;
+            left: 26%;
+        }
+
+        &.contact {
+            top: 14%;
+            left: 76%;
+            color: $color-neon-magenta;
+            text-shadow: 0 0 10px rgba(255, 43, 214, 0.7);
+        }
+
+        &.studio {
+            top: 75%;
+            left: 72%;
+        }
+    }
+
+    .pin-slot {
+        position: absolute;
+        transform: translate(-50%, -50%);
+        width: 35px;
+        height: 35px;
+        padding: 0;
+        background: none;
+        border: none;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+        z-index: 2;
+
+        .slot-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 0 5px rgba($color-neon-cyan, 0.5));
+        }
+
+        &:hover {
+            transform: translate(-50%, -50%) scale(1.15);
+        }
+
+        &.active {
+            filter: drop-shadow(0 0 10px rgba($color-neon-magenta, 0.8));
+        }
+    }
+
+    .pin-marker {
+        position: absolute;
+        transform: translate(-50%, -90%);
+        width: 24px;
+        height: auto;
+        z-index: 3;
+        pointer-events: none;
+        transition: left 0.4s ease, top 0.4s ease;
+
+        .pin-image {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 0 8px $color-neon-magenta) hue-rotate(120deg);
+        }
+    }
+}
+
+// === AUDIO PANEL ===
+.audio-panel {
+    position: fixed;
+    top: 80px;
+    right: 24px;
+    width: 220px;
+    border: 1px solid rgba($color-neon-cyan, 0.3);
+    border-radius: 6px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6),
+                0 0 15px rgba($color-neon-cyan, 0.1);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-20px);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+    z-index: 95;
+    overflow: hidden;
+
+    &.open {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+    }
+
+    .audio-card {
+        position: relative;
+        width: 100%;
+        padding: 18px 16px 20px;
+        background: rgba($color-panel, 0.85);
+        backdrop-filter: blur(16px);
+        overflow: hidden;
+
+        &::before, &::after {
+            display: none !important;
+        }
+        clip-path: none !important;
+    }
+
+    .audio-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        position: relative;
+        z-index: 1;
+
+        h3 {
+            margin: 0;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: $color-neon-cyan;
+            font-family: $font-title;
+            text-shadow: 0 0 8px rgba($color-neon-cyan, 0.5);
+            text-transform: uppercase;
+        }
+
+        .close-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            cursor: pointer;
+            opacity: 0.8;
+            transition: all 0.2s;
+
+            svg {
+                width: 10px;
+                height: 10px;
+                stroke: $color-neon-cyan;
+                stroke-width: 2.5;
+                fill: none;
+                stroke-linecap: round;
+            }
+
+            &:hover {
+                opacity: 1;
+                background: rgba($color-neon-cyan, 0.1);
+                border-color: $color-neon-cyan;
+                transform: scale(1.1);
+                box-shadow: 0 0 8px rgba($color-neon-cyan, 0.4);
+            }
+
+            &:active {
+                transform: scale(0.95);
+            }
+        }
+    }
+
+    .audio-sliders-container {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        position: relative;
+        z-index: 1;
+
+        .slider-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+
+            .slider-label {
+                display: flex;
+                justify-content: space-between;
+                font-family: $font-handwritten;
+                font-size: 13px;
+                color: $color-text;
+                font-weight: 500;
+            }
+
+            .paper-slider {
+                appearance: none;
+                width: 100%;
+                height: 3px;
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 2px;
+                outline: none;
+                cursor: pointer;
+
+                &::-webkit-slider-thumb {
+                    appearance: none;
+                    width: 12px;
+                    height: 12px;
+                    border-radius: 50%;
+                    background: $color-neon-cyan;
+                    cursor: pointer;
+                    box-shadow: 0 0 8px $color-neon-cyan;
+                    transition: transform 0.1s;
+                }
+
+                &::-moz-range-thumb {
+                    width: 12px;
+                    height: 12px;
+                    border-radius: 50%;
+                    background: $color-neon-cyan;
+                    cursor: pointer;
+                    box-shadow: 0 0 8px $color-neon-cyan;
+                    border: none;
+                    transition: transform 0.1s;
+                }
+
+                &::-webkit-slider-thumb:hover {
+                    transform: scale(1.2);
+                }
+            }
+        }
+    }
+}
+
+.menu-overlay {
+    position: fixed;
+    inset: 0;
+    background: transparent;
+    z-index: -1;
+}
+
+// === HUD HINTS ===
+.entrance-hint,
+.corridor-hint {
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 24px;
+    padding: 12px 24px;
+    background: rgba($color-panel, 0.85);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba($color-neon-cyan, 0.4);
+    border-radius: 4px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5),
+                0 0 15px rgba($color-neon-cyan, 0.15);
+    font-size: 13px;
+    color: $color-neon-cyan;
+    pointer-events: auto;
+    font-family: $font-handwritten;
+    letter-spacing: 1px;
+    animation: hintFadeIn 0.5s ease-out;
+
+    span {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    svg {
+        stroke: $color-neon-cyan;
+        filter: drop-shadow(0 0 3px $color-neon-cyan);
+    }
+}
+
+.corridor-hint {
+    animation: hintFadeIn 0.5s ease-out, corridorHintFadeOut 0.5s ease-out 3.5s forwards;
+
+    @keyframes corridorHintFadeOut {
+        to {
+            opacity: 0;
+            transform: translateX(-50%) translateY(10px);
+        }
+    }
+}
+
+@keyframes hintFadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+// === RESPONSIVE ===
+@media (max-width: 768px) {
+    .nav-btn {
+        width: 44px;
+        height: 44px;
+    }
+
+    .back-btn {
+        left: 16px;
+        top: 16px;
+    }
+
+    .nav-controls {
+        right: 16px;
+        top: 16px;
+        gap: 8px;
+    }
+
+    .audio-panel {
+        right: 16px;
+        top: 70px;
+    }
+
+    .map-panel {
+        top: 16px;
+        width: 95%;
+        max-width: none;
+
+        .map-header h3 {
+            font-size: 14px;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .map-panel {
+        width: 100%;
+    }
+}

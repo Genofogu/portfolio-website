@@ -1,37 +1,40 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { AuthProvider } from './features/auth/AuthContext';
-import { ThemeProvider } from './features/theme/ThemeProvider';
-import ProtectedRoute from './features/auth/ProtectedRoute';
-import MainLayout from './features/shared/MainLayout';
-import CustomCursor from './features/shared/CustomCursor'; // Preload cursor
+import { AuthProvider } from '@2d/features/auth/AuthContext';
+import { ThemeProvider } from '@2d/features/theme/ThemeProvider';
+import ProtectedRoute from '@2d/features/auth/ProtectedRoute';
+import MainLayout from '@2d/features/shared/MainLayout';
+import CustomCursor from '@2d/features/shared/CustomCursor';
+import { DimensionProvider } from '@shared/DimensionContext';
+import DimensionTransition from '@shared/DimensionTransition';
 
-// Lazy Loaded Pages
-const HomePage = lazy(() => import('./features/home/HomePage'));
-const AboutPage = lazy(() => import('./features/about/AboutPage'));
-const ProjectsPage = lazy(() => import('./features/projects/ProjectsPage'));
-const ContactPage = lazy(() => import('./features/contact/ContactPage'));
-const IDEPage = lazy(() => import('./features/ide/IDEPage'));
-const IDEEditorPage = lazy(() => import('./features/ide/IDEEditorPage'));
-const JsGamePage = lazy(() => import('./features/games/GameHub'));
-const GamePlayPage = lazy(() => import('./features/games/GamePage'));
-const CaseStudyPage = lazy(() => import('./features/projects/CaseStudyPage'));
-const AuthPage = lazy(() => import('./features/auth/LoginPage'));
-const RegisterPage = lazy(() => import('./features/auth/RegisterPage'));
-const GitHubPage = lazy(() => import('./features/github/GitHubPage'));
-const ComingSoonPage = lazy(() => import('./features/comingsoon/ComingSoonPage'));
+// Lazy Loaded 2D Pages
+const HomePage = lazy(() => import('@2d/features/home/HomePage'));
+const AboutPage = lazy(() => import('@2d/features/about/AboutPage'));
+const ProjectsPage = lazy(() => import('@2d/features/projects/ProjectsPage'));
+const ContactPage = lazy(() => import('@2d/features/contact/ContactPage'));
+const IDEPage = lazy(() => import('@2d/features/ide/IDEPage'));
+const IDEEditorPage = lazy(() => import('@2d/features/ide/IDEEditorPage'));
+const JsGamePage = lazy(() => import('@2d/features/games/GameHub'));
+const GamePlayPage = lazy(() => import('@2d/features/games/GamePage'));
+const CaseStudyPage = lazy(() => import('@2d/features/projects/CaseStudyPage'));
+const GitHubPage = lazy(() => import('@2d/features/github/GitHubPage'));
+const ComingSoonPage = lazy(() => import('@2d/features/comingsoon/ComingSoonPage'));
 
 // Blog Pages
-const BlogPage = lazy(() => import('./features/blog/BlogPage'));
-const BlogPostPage = lazy(() => import('./features/blog/BlogPostPage'));
-const BlogCategoryPage = lazy(() => import('./features/blog/BlogCategoryPage'));
-const BlogSearch = lazy(() => import('./features/blog/BlogSearch'));
+const BlogPage = lazy(() => import('@2d/features/blog/BlogPage'));
+const BlogPostPage = lazy(() => import('@2d/features/blog/BlogPostPage'));
+const BlogCategoryPage = lazy(() => import('@2d/features/blog/BlogCategoryPage'));
+const BlogSearch = lazy(() => import('@2d/features/blog/BlogSearch'));
 
 // Dashboard Pages
-const DashboardLayout = lazy(() => import('./features/dashboard/DashboardLayout'));
-const DashboardPage = lazy(() => import('./features/dashboard/DashboardPage'));
-const TasksPage = lazy(() => import('./features/dashboard/TasksPage'));
-const StatsPage = lazy(() => import('./features/dashboard/StatsPage'));
+const DashboardLayout = lazy(() => import('@2d/features/dashboard/DashboardLayout'));
+const DashboardPage = lazy(() => import('@2d/features/dashboard/DashboardPage'));
+const TasksPage = lazy(() => import('@2d/features/dashboard/TasksPage'));
+const StatsPage = lazy(() => import('@2d/features/dashboard/StatsPage'));
+
+// Lazy Loaded 3D App
+const ThreeDApp = lazy(() => import('@3d/src/App'));
 
 // Loading Fallback
 const LoadingScreen = () => (
@@ -43,64 +46,73 @@ const LoadingScreen = () => (
 function App() {
   return (
     <ThemeProvider>
-      <Router>
-        <AuthProvider>
-        <Suspense fallback={<LoadingScreen />}>
-          <Routes>
-            {/* Public Routes with MainLayout */}
-            <Route element={<MainLayout />}>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/about" element={<AboutPage />} />
-              <Route path="/projects" element={<ProjectsPage />} />
-              <Route path="/contact" element={<ContactPage />} />
-              
-              <Route path="/case-study/:id" element={<CaseStudyPage />} />
-              
-              <Route path="/ide" element={<IDEPage />} />
-              <Route path="/ide/editor" element={<IDEEditorPage />} />
-              
-              <Route path="/js-game" element={<JsGamePage />} />
-              <Route path="/js-game/:gameId" element={<GamePlayPage />} />
+      <DimensionProvider>
+        <Router>
+          <AuthProvider>
+            <DimensionTransition />
+            <Suspense fallback={<LoadingScreen />}>
+              <Routes>
+                {/* 2D Portfolio Route aliases */}
+                <Route path="/2d/*" element={<Navigate to="/" replace />} />
 
-              <Route path="/github" element={<GitHubPage />} />
-              <Route path="/coming-soon" element={<ComingSoonPage />} />
+                {/* 3D Immersive Portfolio */}
+                <Route path="/3d" element={<ThreeDApp />} />
 
-              {/* Blog Routes */}
-              <Route path="/blog" element={<BlogPage />} />
-              <Route path="/blog/:slug" element={<BlogPostPage />} />
-              <Route path="/blog/category/:category" element={<BlogCategoryPage />} />
-              <Route path="/blog/search" element={<BlogSearch />} />
-            </Route>
+                {/* Public 2D Routes with MainLayout */}
+                <Route element={<MainLayout />}>
+                  <Route path="/" element={<HomePage />} />
+                  <Route path="/about" element={<AboutPage />} />
+                  <Route path="/projects" element={<ProjectsPage />} />
+                  <Route path="/contact" element={<ContactPage />} />
+                  
+                  <Route path="/case-study/:id" element={<CaseStudyPage />} />
+                  
+                  <Route path="/ide" element={<IDEPage />} />
+                  <Route path="/ide/editor" element={<IDEEditorPage />} />
+                  
+                  <Route path="/js-game" element={<JsGamePage />} />
+                  <Route path="/js-game/:gameId" element={<GamePlayPage />} />
 
-            {/* Auth Routes redirected to Home */}
-            <Route path="/login" element={<Navigate to="/" replace />} />
-            <Route path="/register" element={<Navigate to="/" replace />} />
+                  <Route path="/github" element={<GitHubPage />} />
+                  <Route path="/coming-soon" element={<ComingSoonPage />} />
 
-            {/* Protected Dashboard Routes (No MainLayout wrapper) */}
-            <Route 
-              path="/dashboard" 
-              element={
-                <ProtectedRoute>
-                  <CustomCursor />
-                  <DashboardLayout />
-                </ProtectedRoute>
-              }
-            >
-              <Route index element={<DashboardPage />} />
-              <Route path="tasks" element={<TasksPage />} />
-              <Route path="stats" element={<StatsPage />} />
-            </Route>
+                  {/* Blog Routes */}
+                  <Route path="/blog" element={<BlogPage />} />
+                  <Route path="/blog/:slug" element={<BlogPostPage />} />
+                  <Route path="/blog/category/:category" element={<BlogCategoryPage />} />
+                  <Route path="/blog/search" element={<BlogSearch />} />
+                </Route>
 
-            {/* Legacy Redirect */}
-            <Route path="/scheduler/*" element={<Navigate to="/dashboard" replace />} />
+                {/* Auth Routes redirected to Home */}
+                <Route path="/login" element={<Navigate to="/" replace />} />
+                <Route path="/register" element={<Navigate to="/" replace />} />
 
-            {/* Catch-all redirect */}
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
-        </Suspense>
-      </AuthProvider>
-    </Router>
-  </ThemeProvider>
+                {/* Protected Dashboard Routes (No MainLayout wrapper) */}
+                <Route 
+                  path="/dashboard" 
+                  element={
+                    <ProtectedRoute>
+                      <CustomCursor />
+                      <DashboardLayout />
+                    </ProtectedRoute>
+                  }
+                >
+                  <Route index element={<DashboardPage />} />
+                  <Route path="tasks" element={<TasksPage />} />
+                  <Route path="stats" element={<StatsPage />} />
+                </Route>
+
+                {/* Legacy Redirect */}
+                <Route path="/scheduler/*" element={<Navigate to="/dashboard" replace />} />
+
+                {/* Catch-all redirect */}
+                <Route path="*" element={<Navigate to="/" replace />} />
+              </Routes>
+            </Suspense>
+          </AuthProvider>
+        </Router>
+      </DimensionProvider>
+    </ThemeProvider>
   );
 }
 

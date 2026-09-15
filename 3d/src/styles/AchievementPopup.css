@@ -1,0 +1,163 @@
+.achievement-popup {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 110;
+  background: rgba(var(--color-panel), 0.9);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--color-neon-magenta);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 15px rgba(var(--color-neon-magenta), 0.25);
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-radius: 4px;
+}
+.achievement-popup::before, .achievement-popup::after {
+  display: none !important;
+}
+.achievement-popup {
+  clip-path: none !important;
+  animation: popupEnter 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+.achievement-popup.hiding {
+  animation: popupExit 0.4s ease forwards;
+}
+.achievement-popup .popup-border {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+.achievement-popup .popup-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+  z-index: 1;
+}
+.achievement-popup .checkbox {
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--color-neon-cyan);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  box-shadow: 0 0 5px rgba(var(--color-neon-cyan), 0.3);
+}
+.achievement-popup .checkbox.checked {
+  animation: bounceCheck 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border-color: var(--color-neon-magenta);
+  box-shadow: 0 0 8px rgba(var(--color-neon-magenta), 0.5);
+}
+.achievement-popup .checkbox .checkmark {
+  width: 18px;
+  height: 18px;
+  background: transparent;
+  stroke: var(--color-neon-magenta);
+  stroke-dasharray: 24;
+  stroke-dashoffset: 24;
+  animation: drawCheck 0.3s ease forwards 0.1s;
+}
+.achievement-popup .text-content {
+  display: flex;
+  flex-direction: column;
+}
+.achievement-popup .text-content .title {
+  font-family: var(--font-title);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-neon-cyan);
+  text-shadow: 0 0 6px rgba(var(--color-neon-cyan), 0.5);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 2px;
+}
+.achievement-popup .text-content .description {
+  font-family: var(--font-primary);
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.4;
+}
+.achievement-popup .text-content .description .inline-sound-toggle {
+  background: none;
+  border: none;
+  padding: 0;
+  margin-left: 4px;
+  font-family: var(--font-title);
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-style: dashed;
+  text-underline-offset: 3px;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+}
+.achievement-popup .text-content .description .inline-sound-toggle.on {
+  color: var(--color-neon-cyan);
+}
+.achievement-popup .text-content .description .inline-sound-toggle.off {
+  color: rgba(255, 255, 255, 0.4);
+}
+.achievement-popup .text-content .description .inline-sound-toggle:hover {
+  opacity: 0.7;
+  transform: scale(1.05);
+}
+@keyframes popupEnter {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+@keyframes popupExit {
+  from {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+}
+@keyframes drawCheck {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes bounceCheck {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@media (max-width: 768px) {
+  .achievement-popup {
+    bottom: 24px;
+    padding: 10px 16px;
+  }
+  .achievement-popup .text-content .title {
+    font-size: 10px;
+  }
+  .achievement-popup .text-content .description {
+    font-size: 10px;
+  }
+}/*# sourceMappingURL=AchievementPopup.css.map */

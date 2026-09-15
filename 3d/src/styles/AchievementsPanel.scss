@@ -1,0 +1,204 @@
+// AchievementsPanel Styles - Cyberpunk HUD Edition
+
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.achievements-panel {
+    position: fixed;
+    top: 80px;
+    right: 24px;
+    width: 280px;
+    border: 1px solid rgba($color-neon-cyan, 0.3);
+    border-radius: 6px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6),
+                0 0 15px rgba($color-neon-cyan, 0.1);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-20px);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+    z-index: 95;
+    overflow: hidden;
+
+    &.open {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+    }
+
+    .achievements-card {
+        position: relative;
+        width: 100%;
+        padding: 18px 16px 20px;
+        background: rgba($color-panel, 0.85);
+        backdrop-filter: blur(16px);
+        overflow: hidden;
+
+        &::before, &::after {
+            display: none !important;
+        }
+        clip-path: none !important;
+    }
+
+    .achievements-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        position: relative;
+        z-index: 1;
+
+        h3 {
+            margin: 0;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: $color-neon-cyan;
+            font-family: $font-title;
+            text-shadow: 0 0 8px rgba($color-neon-cyan, 0.5);
+            text-transform: uppercase;
+        }
+
+        .close-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            cursor: pointer;
+            opacity: 0.8;
+            transition: all 0.2s;
+
+            svg {
+                width: 10px;
+                height: 10px;
+                stroke: $color-neon-cyan;
+                stroke-width: 2.5;
+                fill: none;
+                stroke-linecap: round;
+            }
+
+            &:hover {
+                opacity: 1;
+                background: rgba($color-neon-cyan, 0.1);
+                border-color: $color-neon-cyan;
+                transform: scale(1.1);
+                box-shadow: 0 0 8px rgba($color-neon-cyan, 0.4);
+            }
+
+            &:active {
+                transform: scale(0.95);
+            }
+        }
+    }
+
+    .achievements-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        position: relative;
+        z-index: 1;
+        max-height: 50vh;
+        overflow-y: auto;
+        padding-right: 4px;
+        scrollbar-width: thin;
+        scrollbar-color: rgba($color-neon-cyan, 0.3) transparent;
+
+        &::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: rgba($color-neon-cyan, 0.3);
+            border-radius: 2px;
+        }
+    }
+
+    .achievement-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 6px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+
+        &.locked {
+            opacity: 0.4;
+
+            .achievement-title {
+                color: rgba(255, 255, 255, 0.4) !important;
+            }
+
+            .achievement-label {
+                color: rgba(255, 255, 255, 0.3) !important;
+            }
+
+            svg {
+                stroke: rgba(255, 255, 255, 0.3) !important;
+                filter: none !important;
+            }
+        }
+
+        .achievement-icon {
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+
+            svg {
+                width: 100%;
+                height: 100%;
+                stroke: $color-neon-magenta;
+                filter: drop-shadow(0 0 4px $color-neon-magenta);
+            }
+        }
+
+        .achievement-text {
+            display: flex;
+            flex-direction: column;
+
+            .achievement-title {
+                font-family: $font-title;
+                font-size: 11px;
+                font-weight: 700;
+                color: $color-text;
+                letter-spacing: 0.5px;
+                margin-bottom: 2px;
+            }
+
+            .achievement-label {
+                font-family: $font-handwritten;
+                font-size: 11px;
+                color: rgba(255, 255, 255, 0.6);
+                line-height: 1.2;
+            }
+        }
+    }
+
+    .achievements-footer {
+        margin-top: 12px;
+        padding-top: 10px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        text-align: center;
+        font-family: $font-title;
+        font-weight: bold;
+        font-size: 11px;
+        letter-spacing: 1px;
+        color: $color-neon-cyan;
+        text-shadow: 0 0 5px rgba($color-neon-cyan, 0.4);
+        position: relative;
+        z-index: 1;
+        text-transform: uppercase;
+    }
+
+    @media (max-width: 768px) {
+        right: 16px;
+        width: 260px;
+        top: 70px;
+    }
+}
